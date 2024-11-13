@@ -1,0 +1,7 @@
+.venv
+.git
+.snakemake
+examples
+pub
+demo
+Makefile

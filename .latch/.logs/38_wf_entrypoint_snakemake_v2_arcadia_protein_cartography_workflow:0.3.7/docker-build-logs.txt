@@ -1,0 +1,1426 @@
+Step 1/22 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base-snakemake:0.1.0
+
+
+ ---> 1e5e51399e11
+
+Step 2/22 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> a2fe8f5de25e
+
+Step 3/22 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> 2f50b1c6ffcd
+
+Step 4/22 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 6e333bcbf09d
+
+Step 5/22 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 50828948253a
+
+Step 6/22 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> 8eac2f1ad665
+
+Step 7/22 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> d7dca7350e2c
+
+Step 8/22 : run apt-get update && apt-get install -y git
+
+
+ ---> Using cache
+
+ ---> 7b9c989ff56f
+
+Step 9/22 : run curl -L -O     https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh     && mkdir /root/.conda     && bash Mambaforge-Linux-x86_64.sh -b     && rm -f Mambaforge-Linux-x86_64.sh
+
+
+ ---> Using cache
+
+ ---> 0aff1ecc2c5f
+
+Step 10/22 : env PATH /root/mambaforge/bin:$PATH
+
+
+ ---> Using cache
+
+ ---> 8ce2bb853770
+
+Step 11/22 : copy envs/cartography_tidy.yml /root/envs/cartography_tidy.yml
+
+
+ ---> bdb9e5036b9d
+
+Step 12/22 : run mamba env create -f /root/envs/cartography_tidy.yml -n cartography_tidy
+
+
+ ---> Running in bc6599edeb85
+
+[91mmamba env create -f /root/envs/cartography_tidy.yml -n cartography_tidy
+[0m
+[91m/root/mambaforge/lib/python3.12/argparse.py:2006: FutureWarning: `remote_definition` is deprecated and will be removed in 25.9. Use `conda env create --file=URL` instead.
+  action(self, namespace, argument_values, option_string)
+[0m
+Warning: you have pip-installed dependencies in your environment file, but you do not list pip itself as one of your conda dependencies.  Conda may not use the correct pip to install your packages, and they may end up in the wrong place.  Please add an explicit pip dependency.  I'm adding one for you, but still nagging you.
+
+Channels:
+ - conda-forge
+ - bioconda
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): ...working... 
+done
+Solving environment: ...working... 
+done
+
+[91m
+
+==> WARNING: A newer version of conda exists. <==
+    current version: 24.9.0
+    latest version: 24.9.2
+
+Please update conda by running
+
+    $ conda update -n base -c conda-forge conda
+
+
+[0m
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: ...working... 
+done
+
+Verifying transaction: ...working... 
+done
+
+Executing transaction: ...working... 
+done
+
+Installing pip dependencies: ...working... 
+Ran pip subprocess with arguments:
+['/root/mambaforge/envs/cartography_tidy/bin/python', '-m', 'pip', 'install', '-U', '-r', '/root/envs/condaenv.tsubkiuh.requirements.txt', '--exists-action=b']
+Pip subprocess output:
+Collecting arcadia_pycolor (from -r /root/envs/condaenv.tsubkiuh.requirements.txt (line 1))
+  Cloning https://github.com/Arcadia-Science/arcadia-pycolor.git (to revision 245ad0c) to /tmp/pip-install-7fe2gbug/arcadia-pycolor_e5dcd0019a084378bfd62c68390c8dab
+  Resolved https://github.com/Arcadia-Science/arcadia-pycolor.git to commit 245ad0c
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting bioservices==1.11.2 (from -r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading bioservices-1.11.2.tar.gz (191 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting appdirs (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Using cached appdirs-1.4.4-py2.py3-none-any.whl.metadata (9.0 kB)
+Collecting beautifulsoup4 (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading beautifulsoup4-4.12.3-py3-none-any.whl.metadata (3.8 kB)
+Collecting colorlog (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading colorlog-6.9.0-py3-none-any.whl.metadata (10 kB)
+Collecting easydev>=0.12.0 (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading easydev-0.13.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting grequests (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading grequests-0.7.0-py2.py3-none-any.whl.metadata (1.3 kB)
+Collecting matplotlib (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading matplotlib-3.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+Requirement already satisfied: pandas>=0.21.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (2.0.1)
+Requirement already satisfied: requests in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (2.29.0)
+Collecting requests_cache (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading requests_cache-1.2.1-py3-none-any.whl.metadata (9.9 kB)
+Collecting suds-community>=0.7 (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading suds_community-1.2.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting lxml (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading lxml-5.3.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting tqdm (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading tqdm-4.67.0-py3-none-any.whl.metadata (57 kB)
+Collecting wrapt (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Using cached wrapt-1.16.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting xmltodict (from bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading xmltodict-0.14.2-py2.py3-none-any.whl.metadata (8.0 kB)
+Requirement already satisfied: numpy in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from arcadia_pycolor->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 1)) (1.23.5)
+Collecting plotly (from arcadia_pycolor->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 1))
+  Downloading plotly-5.24.1-py3-none-any.whl.metadata (7.3 kB)
+Collecting colorspacious (from arcadia_pycolor->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 1))
+  Downloading colorspacious-1.1.2-py2.py3-none-any.whl.metadata (3.6 kB)
+Collecting colorama<0.5.0,>=0.4.6 (from easydev>=0.12.0->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting line-profiler<5.0.0,>=4.1.2 (from easydev>=0.12.0->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading line_profiler-4.1.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (34 kB)
+Collecting pexpect<5.0.0,>=4.9.0 (from easydev>=0.12.0->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading pexpect-4.9.0-py2.py3-none-any.whl.metadata (2.5 kB)
+Collecting platformdirs<5.0.0,>=4.2.0 (from easydev>=0.12.0->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Using cached platformdirs-4.3.6-py3-none-any.whl.metadata (11 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from pandas>=0.21.1->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (2.9.0)
+Requirement already satisfied: pytz>=2020.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from pandas>=0.21.1->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (2024.2)
+Requirement already satisfied: tzdata>=2022.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from pandas>=0.21.1->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (2024.2)
+Collecting soupsieve>1.2 (from beautifulsoup4->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading soupsieve-2.6-py3-none-any.whl.metadata (4.6 kB)
+Collecting gevent (from grequests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading gevent-24.11.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (13 kB)
+Collecting contourpy>=1.0.1 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading contourpy-1.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.4 kB)
+Collecting cycler>=0.10 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading fonttools-4.54.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (163 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading kiwisolver-1.4.7-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.3 kB)
+Collecting packaging>=20.0 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Using cached packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting pillow>=8 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading pillow-11.0.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting pyparsing>=2.3.1 (from matplotlib->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading pyparsing-3.2.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting tenacity>=6.2.0 (from plotly->arcadia_pycolor->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 1))
+  Downloading tenacity-9.0.0-py3-none-any.whl.metadata (1.2 kB)
+Requirement already satisfied: charset-normalizer<4,>=2 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (3.4.0)
+Requirement already satisfied: idna<4,>=2.5 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (3.10)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (1.26.19)
+Requirement already satisfied: certifi>=2017.4.17 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (2024.8.30)
+Collecting attrs>=21.2 (from requests_cache->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Using cached attrs-24.2.0-py3-none-any.whl.metadata (11 kB)
+Collecting cattrs>=22.2 (from requests_cache->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading cattrs-24.1.2-py3-none-any.whl.metadata (8.4 kB)
+Collecting url-normalize>=1.4 (from requests_cache->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading url_normalize-1.4.3-py2.py3-none-any.whl.metadata (3.1 kB)
+Collecting ptyprocess>=0.5 (from pexpect<5.0.0,>=4.9.0->easydev>=0.12.0->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading ptyprocess-0.7.0-py2.py3-none-any.whl.metadata (1.3 kB)
+Requirement already satisfied: six>=1.5 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from python-dateutil>=2.8.2->pandas>=0.21.1->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (1.16.0)
+Collecting zope.event (from gevent->grequests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading zope.event-5.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting zope.interface (from gevent->grequests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading zope.interface-7.1.1-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (44 kB)
+Collecting greenlet>=3.1.1 (from gevent->grequests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2))
+  Downloading greenlet-3.1.1-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Requirement already satisfied: setuptools in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from zope.event->gevent->grequests->bioservices==1.11.2->-r /root/envs/condaenv.tsubkiuh.requirements.txt (line 2)) (75.3.0)
+Downloading easydev-0.13.2-py3-none-any.whl (56 kB)
+Downloading colorlog-6.9.0-py3-none-any.whl (11 kB)
+Downloading suds_community-1.2.0-py3-none-any.whl (145 kB)
+Using cached appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+Downloading beautifulsoup4-4.12.3-py3-none-any.whl (147 kB)
+Downloading colorspacious-1.1.2-py2.py3-none-any.whl (37 kB)
+Downloading grequests-0.7.0-py2.py3-none-any.whl (5.7 kB)
+Downloading lxml-5.3.0-cp311-cp311-manylinux_2_28_x86_64.whl (5.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 26.1 MB/s eta 0:00:00
+Downloading matplotlib-3.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.3/8.3 MB 29.7 MB/s eta 0:00:00
+Downloading plotly-5.24.1-py3-none-any.whl (19.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.1/19.1 MB 33.2 MB/s eta 0:00:00
+Downloading requests_cache-1.2.1-py3-none-any.whl (61 kB)
+Downloading tqdm-4.67.0-py3-none-any.whl (78 kB)
+Using cached wrapt-1.16.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (80 kB)
+Downloading xmltodict-0.14.2-py2.py3-none-any.whl (10.0 kB)
+Using cached attrs-24.2.0-py3-none-any.whl (63 kB)
+Downloading cattrs-24.1.2-py3-none-any.whl (66 kB)
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Downloading contourpy-1.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (326 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.54.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 37.8 MB/s eta 0:00:00
+Downloading kiwisolver-1.4.7-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 36.3 MB/s eta 0:00:00
+Downloading line_profiler-4.1.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (748 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 748.4/748.4 kB 25.4 MB/s eta 0:00:00
+Using cached packaging-24.2-py3-none-any.whl (65 kB)
+Downloading pexpect-4.9.0-py2.py3-none-any.whl (63 kB)
+Downloading pillow-11.0.0-cp311-cp311-manylinux_2_28_x86_64.whl (4.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 33.5 MB/s eta 0:00:00
+Using cached platformdirs-4.3.6-py3-none-any.whl (18 kB)
+Downloading pyparsing-3.2.0-py3-none-any.whl (106 kB)
+Downloading soupsieve-2.6-py3-none-any.whl (36 kB)
+Downloading tenacity-9.0.0-py3-none-any.whl (28 kB)
+Downloading url_normalize-1.4.3-py2.py3-none-any.whl (6.8 kB)
+Downloading gevent-24.11.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (6.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.8/6.8 MB 36.4 MB/s eta 0:00:00
+Downloading greenlet-3.1.1-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (602 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 602.4/602.4 kB 28.3 MB/s eta 0:00:00
+Downloading ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+Downloading zope.event-5.0-py3-none-any.whl (6.8 kB)
+Downloading zope.interface-7.1.1-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (259 kB)
+Building wheels for collected packages: bioservices, arcadia_pycolor
+  Building wheel for bioservices (setup.py): started
+  Building wheel for bioservices (setup.py): finished with status 'done'
+  Created wheel for bioservices: filename=bioservices-1.11.2-py3-none-any.whl size=223228 sha256=78207cd868a36d722cbc1efc3241962b09fec06b3e258af9b17d331c432ff969
+  Stored in directory: /root/.cache/pip/wheels/7f/99/8b/4bad72b741806a29f19ee46b1483ceb7498f8d07df2286a986
+  Building wheel for arcadia_pycolor (setup.py): started
+  Building wheel for arcadia_pycolor (setup.py): finished with status 'done'
+  Created wheel for arcadia_pycolor: filename=arcadia_pycolor-0.3-py3-none-any.whl size=15106 sha256=31bb5fb9f25096003e6007630ded43258712b52871882b1a09d0b36c3949eacf
+  Stored in directory: /tmp/pip-ephem-wheel-cache-u04thps7/wheels/c9/e6/4e/4b6754a696dd5bb6131f865247ef8799f7836409894affbc00
+Successfully built bioservices arcadia_pycolor
+Installing collected packages: ptyprocess, appdirs, zope.interface, zope.event, xmltodict, wrapt, url-normalize, tqdm, tenacity, suds-community, soupsieve, pyparsing, platformdirs, pillow, pexpect, packaging, lxml, line-profiler, kiwisolver, greenlet, fonttools, cycler, contourpy, colorspacious, colorlog, colorama, attrs, plotly, matplotlib, gevent, easydev, cattrs, beautifulsoup4, requests_cache, grequests, arcadia_pycolor, bioservices
+Successfully installed appdirs-1.4.4 arcadia_pycolor-0.3 attrs-24.2.0 beautifulsoup4-4.12.3 bioservices-1.11.2 cattrs-24.1.2 colorama-0.4.6 colorlog-6.9.0 colorspacious-1.1.2 contourpy-1.3.1 cycler-0.12.1 easydev-0.13.2 fonttools-4.54.1 gevent-24.11.1 greenlet-3.1.1 grequests-0.7.0 kiwisolver-1.4.7 line-profiler-4.1.3 lxml-5.3.0 matplotlib-3.9.2 packaging-24.2 pexpect-4.9.0 pillow-11.0.0 platformdirs-4.3.6 plotly-5.24.1 ptyprocess-0.7.0 pyparsing-3.2.0 requests_cache-1.2.1 soupsieve-2.6 suds-community-1.2.0 tenacity-9.0.0 tqdm-4.67.0 url-normalize-1.4.3 wrapt-1.16.0 xmltodict-0.14.2 zope.event-5.0 zope.interface-7.1.1
+
+
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate cartography_tidy
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+
+ ---> ee0b343c46a2
+
+Step 13/22 : env PATH /root/mambaforge/envs/cartography_tidy/bin:$PATH
+
+
+ ---> Running in 4c04ba7dd921
+
+ ---> f84d152691e4
+
+Step 14/22 : copy snakemake_executor_plugin_latch /root/snakemake_executor_plugin_latch
+
+
+ ---> 96ffd883b9ea
+
+Step 15/22 : run pip install /root/snakemake_executor_plugin_latch
+
+
+ ---> Running in 906fa4102fbd
+
+[91mpip install /root/snakemake_executor_plugin_latch
+[0m
+Processing /root/snakemake_executor_plugin_latch
+
+  Installing build dependencies: started
+
+  Installing build dependencies: finished with status 'done'
+
+  Getting requirements to build wheel: started
+
+  Getting requirements to build wheel: finished with status 'done'
+
+  Preparing metadata (pyproject.toml): started
+
+  Preparing metadata (pyproject.toml): finished with status 'done'
+
+Collecting aiohttp<4.0.0,>=3.10.10 (from snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading aiohttp-3.10.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.6 kB)
+
+Collecting gql<4.0.0,>=3.5.0 (from snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached gql-3.5.0-py2.py3-none-any.whl.metadata (9.2 kB)
+
+Collecting python-dateutil<3.0.0,>=2.9.0.post0 (from snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+
+Collecting requests-toolbelt<2.0.0,>=1.0.0 (from snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+
+Collecting snakemake-interface-executor-plugins<10.0.0,>=9.3.2 (from snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached snakemake_interface_executor_plugins-9.3.2-py3-none-any.whl.metadata (7.8 kB)
+
+Collecting aiohappyeyeballs>=2.3.0 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading aiohappyeyeballs-2.4.3-py3-none-any.whl.metadata (6.1 kB)
+
+Collecting aiosignal>=1.1.2 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading aiosignal-1.3.1-py3-none-any.whl.metadata (4.0 kB)
+
+Requirement already satisfied: attrs>=17.3.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0) (24.2.0)
+
+Collecting frozenlist>=1.1.1 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading frozenlist-1.5.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (13 kB)
+
+Collecting multidict<7.0,>=4.5 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached multidict-6.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.0 kB)
+
+Collecting yarl<2.0,>=1.12.0 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached yarl-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (64 kB)
+
+Collecting graphql-core<3.3,>=3.2 (from gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached graphql_core-3.2.5-py3-none-any.whl.metadata (10 kB)
+
+Collecting backoff<3.0,>=1.11.1 (from gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached backoff-2.2.1-py3-none-any.whl.metadata (14 kB)
+
+Collecting anyio<5,>=3.0 (from gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached anyio-4.6.2.post1-py3-none-any.whl.metadata (4.7 kB)
+
+Requirement already satisfied: six>=1.5 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from python-dateutil<3.0.0,>=2.9.0.post0->snakemake-executor-plugin-latch==0.1.0) (1.16.0)
+
+Requirement already satisfied: requests<3.0.0,>=2.0.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (2.29.0)
+
+Collecting argparse-dataclass<3.0.0,>=2.0.0 (from snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached argparse_dataclass-2.0.0-py3-none-any.whl.metadata (7.2 kB)
+
+Collecting snakemake-interface-common<2.0.0,>=1.17.4 (from snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached snakemake_interface_common-1.17.4-py3-none-any.whl.metadata (760 bytes)
+
+Collecting throttler<2.0.0,>=1.2.2 (from snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached throttler-1.2.2-py3-none-any.whl.metadata (7.4 kB)
+
+Requirement already satisfied: idna>=2.8 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from anyio<5,>=3.0->gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0) (3.10)
+
+Collecting sniffio>=1.1 (from anyio<5,>=3.0->gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+
+Requirement already satisfied: charset-normalizer<4,>=2 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests<3.0.0,>=2.0.1->requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (3.4.0)
+
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests<3.0.0,>=2.0.1->requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (1.26.19)
+
+Requirement already satisfied: certifi>=2017.4.17 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests<3.0.0,>=2.0.1->requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (2024.8.30)
+
+Collecting ConfigArgParse<2.0,>=1.7 (from snakemake-interface-common<2.0.0,>=1.17.4->snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached ConfigArgParse-1.7-py3-none-any.whl.metadata (23 kB)
+
+Collecting propcache>=0.2.0 (from yarl<2.0,>=1.12.0->aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Using cached propcache-0.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.7 kB)
+
+Downloading aiohttp-3.10.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 27.9 MB/s eta 0:00:00
+
+
+Using cached gql-3.5.0-py2.py3-none-any.whl (74 kB)
+
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+
+Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+
+Using cached snakemake_interface_executor_plugins-9.3.2-py3-none-any.whl (22 kB)
+
+Downloading aiohappyeyeballs-2.4.3-py3-none-any.whl (14 kB)
+
+Downloading aiosignal-1.3.1-py3-none-any.whl (7.6 kB)
+
+Using cached anyio-4.6.2.post1-py3-none-any.whl (90 kB)
+
+Using cached argparse_dataclass-2.0.0-py3-none-any.whl (8.8 kB)
+
+Using cached backoff-2.2.1-py3-none-any.whl (15 kB)
+
+Downloading frozenlist-1.5.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (274 kB)
+
+Using cached graphql_core-3.2.5-py3-none-any.whl (203 kB)
+
+Using cached multidict-6.1.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (129 kB)
+
+Using cached snakemake_interface_common-1.17.4-py3-none-any.whl (14 kB)
+
+Using cached throttler-1.2.2-py3-none-any.whl (7.6 kB)
+
+Using cached yarl-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (343 kB)
+
+Using cached ConfigArgParse-1.7-py3-none-any.whl (25 kB)
+
+Using cached propcache-0.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (236 kB)
+
+Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+
+Building wheels for collected packages: snakemake-executor-plugin-latch
+
+  Building wheel for snakemake-executor-plugin-latch (pyproject.toml): started
+
+  Building wheel for snakemake-executor-plugin-latch (pyproject.toml): finished with status 'done'
+
+  Created wheel for snakemake-executor-plugin-latch: filename=snakemake_executor_plugin_latch-0.1.0-py3-none-any.whl size=4832 sha256=d75f24723cd317a2ef8d7d25bc56b55fa1dabd1f1f4d0c1a93fbde78afeb5c01
+  Stored in directory: /tmp/pip-ephem-wheel-cache-sg4jfm62/wheels/c6/06/55/ed7bda4e3dc7c4a768e42bfc4dd936378cef4fcc36386dfd0f
+
+Successfully built snakemake-executor-plugin-latch
+
+Installing collected packages: throttler, sniffio, python-dateutil, propcache, multidict, graphql-core, frozenlist, ConfigArgParse, backoff, argparse-dataclass, aiohappyeyeballs, yarl, snakemake-interface-common, requests-toolbelt, anyio, aiosignal, snakemake-interface-executor-plugins, gql, aiohttp, snakemake-executor-plugin-latch
+
+  Attempting uninstall: python-dateutil
+
+    Found existing installation: python-dateutil 2.9.0
+
+    Uninstalling python-dateutil-2.9.0:
+
+      Successfully uninstalled python-dateutil-2.9.0
+
+Successfully installed ConfigArgParse-1.7 aiohappyeyeballs-2.4.3 aiohttp-3.10.10 aiosignal-1.3.1 anyio-4.6.2.post1 argparse-dataclass-2.0.0 backoff-2.2.1 frozenlist-1.5.0 gql-3.5.0 graphql-core-3.2.5 multidict-6.1.0 propcache-0.2.0 python-dateutil-2.9.0.post0 requests-toolbelt-1.0.0 snakemake-executor-plugin-latch-0.1.0 snakemake-interface-common-1.17.4 snakemake-interface-executor-plugins-9.3.2 sniffio-1.3.1 throttler-1.2.2 yarl-1.17.1
+
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m
+ ---> bd49a2319f37
+
+Step 16/22 : run pip install latch==2.54.0a8 snakemake
+
+
+ ---> Running in 1b84820c1651
+
+[91mpip install latch==2.54.0a8 snakemake
+[0m
+Collecting latch==2.54.0a8
+
+  Downloading latch-2.54.0a8-py3-none-any.whl.metadata (7.9 kB)
+
+Collecting snakemake
+
+  Using cached snakemake-8.25.3-py3-none-any.whl.metadata (2.5 kB)
+
+Collecting aioconsole==0.6.1 (from latch==2.54.0a8)
+
+  Downloading aioconsole-0.6.1-py3-none-any.whl.metadata (5.2 kB)
+
+Collecting apscheduler>=3.10.0 (from latch==2.54.0a8)
+
+  Downloading APScheduler-3.10.4-py3-none-any.whl.metadata (5.7 kB)
+
+Collecting asyncssh==2.13.2 (from latch==2.54.0a8)
+
+  Downloading asyncssh-2.13.2-py3-none-any.whl.metadata (9.8 kB)
+
+Collecting boto3>=1.26.0 (from latch==2.54.0a8)
+
+  Downloading boto3-1.35.59-py3-none-any.whl.metadata (6.7 kB)
+
+Collecting click>=8.0 (from latch==2.54.0a8)
+
+  Downloading click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+
+Collecting docker>=7.1.0 (from latch==2.54.0a8)
+
+  Downloading docker-7.1.0-py3-none-any.whl.metadata (3.8 kB)
+
+Collecting gitpython==3.1.40 (from latch==2.54.0a8)
+
+  Downloading GitPython-3.1.40-py3-none-any.whl.metadata (12 kB)
+
+Requirement already satisfied: gql<4.0.0,>=3.5.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from latch==2.54.0a8) (3.5.0)
+
+Collecting graphql-core==3.2.3 (from latch==2.54.0a8)
+
+  Downloading graphql_core-3.2.3-py3-none-any.whl.metadata (10 kB)
+
+Collecting kubernetes>=24.2.0 (from latch==2.54.0a8)
+
+  Downloading kubernetes-31.0.0-py2.py3-none-any.whl.metadata (1.5 kB)
+
+Collecting lytekit==0.15.14 (from latch==2.54.0a8)
+
+  Downloading lytekit-0.15.14-py3-none-any.whl.metadata (5.7 kB)
+
+Collecting lytekitplugins-pods==0.6.2 (from latch==2.54.0a8)
+
+  Downloading lytekitplugins_pods-0.6.2-py3-none-any.whl.metadata (915 bytes)
+
+Collecting paramiko>=3.4.0 (from latch==2.54.0a8)
+
+  Downloading paramiko-3.5.0-py3-none-any.whl.metadata (4.4 kB)
+
+Collecting pyjwt>=0.2.0 (from latch==2.54.0a8)
+
+  Downloading PyJWT-2.9.0-py3-none-any.whl.metadata (3.0 kB)
+
+Requirement already satisfied: python-dateutil>=2.8 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from latch==2.54.0a8) (2.9.0.post0)
+
+Requirement already satisfied: requests-toolbelt<2.0.0,>=1.0.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from latch==2.54.0a8) (1.0.0)
+
+Requirement already satisfied: requests>=2.28.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from latch==2.54.0a8) (2.29.0)
+
+Collecting scp>=0.14.0 (from latch==2.54.0a8)
+
+  Downloading scp-0.15.0-py2.py3-none-any.whl.metadata (4.3 kB)
+
+Requirement already satisfied: setuptools>=75.3.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from latch==2.54.0a8) (75.3.0)
+
+Requirement already satisfied: tqdm>=4.63.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from latch==2.54.0a8) (4.67.0)
+
+Collecting typing-extensions>=4.12.0 (from latch==2.54.0a8)
+
+  Downloading typing_extensions-4.12.2-py3-none-any.whl.metadata (3.0 kB)
+
+Collecting watchfiles==0.19.0 (from latch==2.54.0a8)
+
+  Downloading watchfiles-0.19.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+
+Collecting websockets==11.0.3 (from latch==2.54.0a8)
+
+  Downloading websockets-11.0.3-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+
+Collecting cryptography>=3.1 (from asyncssh==2.13.2->latch==2.54.0a8)
+
+  Downloading cryptography-43.0.3-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (5.4 kB)
+
+Collecting gitdb<5,>=4.0.1 (from gitpython==3.1.40->latch==2.54.0a8)
+
+  Using cached gitdb-4.0.11-py3-none-any.whl.metadata (1.2 kB)
+
+Collecting lyteidl==0.2.1 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading lyteidl-0.2.1-py3-none-any.whl.metadata (403 bytes)
+
+Requirement already satisfied: wheel<1.0.0,>=0.30.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from lytekit==0.15.14->latch==2.54.0a8) (0.45.0)
+
+Collecting croniter<4.0.0,>=0.3.20 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading croniter-3.0.4-py2.py3-none-any.whl.metadata (29 kB)
+
+Collecting deprecated<2.0,>=1.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading Deprecated-1.2.14-py2.py3-none-any.whl.metadata (5.4 kB)
+
+Collecting grpcio!=1.45.0,<2.0,>=1.43.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading grpcio-1.67.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.9 kB)
+
+Collecting grpcio-status!=1.45.0,>=1.43 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading grpcio_status-1.67.1-py3-none-any.whl.metadata (1.1 kB)
+
+Collecting protobuf<4,>=3.6.1 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading protobuf-3.20.3-py2.py3-none-any.whl.metadata (720 bytes)
+
+Collecting python-json-logger>=2.0.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading python_json_logger-2.0.7-py3-none-any.whl.metadata (6.5 kB)
+
+Collecting pytimeparse<2.0.0,>=1.1.8 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading pytimeparse-1.1.8-py2.py3-none-any.whl.metadata (3.4 kB)
+
+Requirement already satisfied: pytz in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from lytekit==0.15.14->latch==2.54.0a8) (2024.2)
+
+Collecting keyring>=18.0.1 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading keyring-25.5.0-py3-none-any.whl.metadata (20 kB)
+
+Collecting responses>=0.10.7 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading responses-0.25.3-py3-none-any.whl.metadata (46 kB)
+
+Collecting sortedcontainers<3.0.0,>=1.5.9 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+
+Collecting statsd<4.0.0,>=3.0.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading statsd-3.3.0-py2.py3-none-any.whl.metadata (2.8 kB)
+
+Requirement already satisfied: urllib3<2.0.0,>=1.22 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from lytekit==0.15.14->latch==2.54.0a8) (1.26.19)
+
+Requirement already satisfied: wrapt<2.0.0,>=1.0.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from lytekit==0.15.14->latch==2.54.0a8) (1.16.0)
+
+Collecting retry==0.9.2 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading retry-0.9.2-py2.py3-none-any.whl.metadata (5.8 kB)
+
+Collecting dataclasses-json<=0.5.6,>=0.5.2 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading dataclasses_json-0.5.6-py3-none-any.whl.metadata (22 kB)
+
+Collecting jsonschema>=4.5.1 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Using cached jsonschema-4.23.0-py3-none-any.whl.metadata (7.9 kB)
+
+Collecting marshmallow-jsonschema>=0.12.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading marshmallow_jsonschema-0.13.0-py3-none-any.whl.metadata (7.5 kB)
+
+Collecting marshmallow-enum (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading marshmallow_enum-1.5.1-py2.py3-none-any.whl.metadata (2.5 kB)
+
+Collecting natsort>=7.0.1 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading natsort-8.4.0-py3-none-any.whl.metadata (21 kB)
+
+Collecting docker-image-py>=0.1.10 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading docker_image_py-0.1.13-py3-none-any.whl.metadata (223 bytes)
+
+Collecting docstring-parser>=0.9.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading docstring_parser-0.16-py3-none-any.whl.metadata (3.0 kB)
+
+Collecting diskcache>=5.2.1 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading diskcache-5.6.3-py3-none-any.whl.metadata (20 kB)
+
+Collecting cloudpickle>=2.0.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading cloudpickle-3.1.0-py3-none-any.whl.metadata (7.0 kB)
+
+Collecting cookiecutter>=1.7.3 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading cookiecutter-2.6.0-py3-none-any.whl.metadata (7.3 kB)
+
+Collecting latch-persistence==0.1.0 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Using cached latch_persistence-0.1.0-py3-none-any.whl.metadata (195 bytes)
+
+Requirement already satisfied: anyio>=3.0.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from watchfiles==0.19.0->latch==2.54.0a8) (4.6.2.post1)
+
+Collecting requests>=2.28.1 (from latch==2.54.0a8)
+
+  Using cached requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+
+Collecting googleapis-common-protos (from lyteidl==0.2.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading googleapis_common_protos-1.66.0-py2.py3-none-any.whl.metadata (1.5 kB)
+
+Collecting protoc-gen-swagger (from lyteidl==0.2.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading protoc_gen_swagger-0.1.0-py2.py3-none-any.whl.metadata (2.3 kB)
+
+Collecting decorator>=3.4.2 (from retry==0.9.2->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading decorator-5.1.1-py3-none-any.whl.metadata (4.0 kB)
+
+Collecting py<2.0.0,>=1.4.26 (from retry==0.9.2->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading py-1.11.0-py2.py3-none-any.whl.metadata (2.8 kB)
+
+Requirement already satisfied: appdirs in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake) (1.4.4)
+
+Collecting immutables (from snakemake)
+
+  Using cached immutables-0.21-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.5 kB)
+
+Requirement already satisfied: configargparse in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake) (1.7)
+
+Collecting connection-pool>=0.0.3 (from snakemake)
+
+  Using cached connection_pool-0.0.3-py3-none-any.whl
+
+Collecting datrie (from snakemake)
+
+  Using cached datrie-0.8.2-cp311-cp311-linux_x86_64.whl
+
+Collecting docutils (from snakemake)
+
+  Downloading docutils-0.21.2-py3-none-any.whl.metadata (2.8 kB)
+
+Collecting humanfriendly (from snakemake)
+
+  Using cached humanfriendly-10.0-py2.py3-none-any.whl.metadata (9.2 kB)
+
+Collecting jinja2<4.0,>=3.0 (from snakemake)
+
+  Using cached jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)
+
+Collecting nbformat (from snakemake)
+
+  Using cached nbformat-5.10.4-py3-none-any.whl.metadata (3.6 kB)
+
+Requirement already satisfied: packaging in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake) (24.2)
+
+Collecting psutil (from snakemake)
+
+  Using cached psutil-6.1.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (22 kB)
+
+Collecting pulp<2.10,>=2.3.1 (from snakemake)
+
+  Using cached PuLP-2.9.0-py3-none-any.whl.metadata (5.4 kB)
+
+Collecting pyyaml (from snakemake)
+
+  Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+
+Collecting reretry (from snakemake)
+
+  Using cached reretry-0.11.8-py2.py3-none-any.whl.metadata (5.5 kB)
+
+Collecting smart-open<8.0,>=4.0 (from snakemake)
+
+  Using cached smart_open-7.0.5-py3-none-any.whl.metadata (24 kB)
+
+Requirement already satisfied: snakemake-interface-executor-plugins<10.0,>=9.3.2 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake) (9.3.2)
+
+Requirement already satisfied: snakemake-interface-common<2.0,>=1.17.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake) (1.17.4)
+
+Collecting snakemake-interface-storage-plugins<4.0,>=3.2.3 (from snakemake)
+
+  Using cached snakemake_interface_storage_plugins-3.3.0-py3-none-any.whl.metadata (9.8 kB)
+
+Collecting snakemake-interface-report-plugins<2.0.0,>=1.1.0 (from snakemake)
+
+  Using cached snakemake_interface_report_plugins-1.1.0-py3-none-any.whl.metadata (3.4 kB)
+
+Collecting tabulate (from snakemake)
+
+  Using cached tabulate-0.9.0-py3-none-any.whl.metadata (34 kB)
+
+Requirement already satisfied: throttler in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake) (1.2.2)
+
+Collecting yte<2.0,>=1.5.1 (from snakemake)
+
+  Using cached yte-1.5.4-py3-none-any.whl.metadata (3.4 kB)
+
+Collecting dpath<3.0.0,>=2.1.6 (from snakemake)
+
+  Using cached dpath-2.2.0-py3-none-any.whl.metadata (15 kB)
+
+Collecting conda-inject<2.0,>=1.3.1 (from snakemake)
+
+  Using cached conda_inject-1.3.2-py3-none-any.whl.metadata (855 bytes)
+
+Requirement already satisfied: six>=1.4.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from apscheduler>=3.10.0->latch==2.54.0a8) (1.16.0)
+
+Collecting tzlocal!=3.*,>=2.0 (from apscheduler>=3.10.0->latch==2.54.0a8)
+
+  Downloading tzlocal-5.2-py3-none-any.whl.metadata (7.8 kB)
+
+Collecting botocore<1.36.0,>=1.35.59 (from boto3>=1.26.0->latch==2.54.0a8)
+
+  Downloading botocore-1.35.59-py3-none-any.whl.metadata (5.7 kB)
+
+Collecting jmespath<2.0.0,>=0.7.1 (from boto3>=1.26.0->latch==2.54.0a8)
+
+  Using cached jmespath-1.0.1-py3-none-any.whl.metadata (7.6 kB)
+
+Collecting s3transfer<0.11.0,>=0.10.0 (from boto3>=1.26.0->latch==2.54.0a8)
+
+  Downloading s3transfer-0.10.3-py3-none-any.whl.metadata (1.7 kB)
+
+Requirement already satisfied: yarl<2.0,>=1.6 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from gql<4.0.0,>=3.5.0->latch==2.54.0a8) (1.17.1)
+
+Requirement already satisfied: backoff<3.0,>=1.11.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from gql<4.0.0,>=3.5.0->latch==2.54.0a8) (2.2.1)
+
+Collecting MarkupSafe>=2.0 (from jinja2<4.0,>=3.0->snakemake)
+
+  Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+
+Requirement already satisfied: attrs>=22.2.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from jsonschema>=4.5.1->lytekit==0.15.14->latch==2.54.0a8) (24.2.0)
+
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.5.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Using cached jsonschema_specifications-2024.10.1-py3-none-any.whl.metadata (3.0 kB)
+
+Collecting referencing>=0.28.4 (from jsonschema>=4.5.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Using cached referencing-0.35.1-py3-none-any.whl.metadata (2.8 kB)
+
+Collecting rpds-py>=0.7.1 (from jsonschema>=4.5.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Using cached rpds_py-0.21.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+
+Requirement already satisfied: certifi>=14.05.14 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from kubernetes>=24.2.0->latch==2.54.0a8) (2024.8.30)
+
+Collecting google-auth>=1.0.1 (from kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading google_auth-2.36.0-py2.py3-none-any.whl.metadata (4.7 kB)
+
+Collecting websocket-client!=0.40.0,!=0.41.*,!=0.42.*,>=0.32.0 (from kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading websocket_client-1.8.0-py3-none-any.whl.metadata (8.0 kB)
+
+Collecting requests-oauthlib (from kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl.metadata (11 kB)
+
+Collecting oauthlib>=3.2.2 (from kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading oauthlib-3.2.2-py3-none-any.whl.metadata (7.5 kB)
+
+Collecting durationpy>=0.7 (from kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading durationpy-0.9-py3-none-any.whl.metadata (338 bytes)
+
+Collecting bcrypt>=3.2 (from paramiko>=3.4.0->latch==2.54.0a8)
+
+  Downloading bcrypt-4.2.0-cp39-abi3-manylinux_2_28_x86_64.whl.metadata (9.6 kB)
+
+Collecting pynacl>=1.5 (from paramiko>=3.4.0->latch==2.54.0a8)
+
+  Downloading PyNaCl-1.5.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl.metadata (8.6 kB)
+
+Requirement already satisfied: charset-normalizer<4,>=2 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests>=2.28.1->latch==2.54.0a8) (3.4.0)
+
+Requirement already satisfied: idna<4,>=2.5 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from requests>=2.28.1->latch==2.54.0a8) (3.10)
+
+Requirement already satisfied: argparse-dataclass<3.0.0,>=2.0.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from snakemake-interface-common<2.0,>=1.17.0->snakemake) (2.0.0)
+
+Collecting plac<2.0.0,>=1.3.4 (from yte<2.0,>=1.5.1->snakemake)
+
+  Using cached plac-1.4.3-py2.py3-none-any.whl.metadata (5.9 kB)
+
+Collecting fastjsonschema>=2.15 (from nbformat->snakemake)
+
+  Using cached fastjsonschema-2.20.0-py3-none-any.whl.metadata (2.1 kB)
+
+Collecting jupyter-core!=5.0.*,>=4.12 (from nbformat->snakemake)
+
+  Using cached jupyter_core-5.7.2-py3-none-any.whl.metadata (3.4 kB)
+
+Collecting traitlets>=5.1 (from nbformat->snakemake)
+
+  Using cached traitlets-5.14.3-py3-none-any.whl.metadata (10 kB)
+
+Requirement already satisfied: sniffio>=1.1 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from anyio>=3.0.0->watchfiles==0.19.0->latch==2.54.0a8) (1.3.1)
+
+Collecting binaryornot>=0.4.4 (from cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading binaryornot-0.4.4-py2.py3-none-any.whl.metadata (6.0 kB)
+
+Collecting python-slugify>=4.0.0 (from cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading python_slugify-8.0.4-py2.py3-none-any.whl.metadata (8.5 kB)
+
+Collecting arrow (from cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading arrow-1.3.0-py3-none-any.whl.metadata (7.5 kB)
+
+Collecting rich (from cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading rich-13.9.4-py3-none-any.whl.metadata (18 kB)
+
+Collecting cffi>=1.12 (from cryptography>=3.1->asyncssh==2.13.2->latch==2.54.0a8)
+
+  Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+
+Collecting marshmallow<4.0.0,>=3.3.0 (from dataclasses-json<=0.5.6,>=0.5.2->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading marshmallow-3.23.1-py3-none-any.whl.metadata (7.5 kB)
+
+Collecting typing-inspect>=0.4.0 (from dataclasses-json<=0.5.6,>=0.5.2->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading typing_inspect-0.9.0-py3-none-any.whl.metadata (1.5 kB)
+
+Collecting regex>=2019.4.14 (from docker-image-py>=0.1.10->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading regex-2024.11.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (40 kB)
+
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython==3.1.40->latch==2.54.0a8)
+
+  Using cached smmap-5.0.1-py3-none-any.whl.metadata (4.3 kB)
+
+Collecting cachetools<6.0,>=2.0.0 (from google-auth>=1.0.1->kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading cachetools-5.5.0-py3-none-any.whl.metadata (5.3 kB)
+
+Collecting pyasn1-modules>=0.2.1 (from google-auth>=1.0.1->kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading pyasn1_modules-0.4.1-py3-none-any.whl.metadata (3.5 kB)
+
+Collecting rsa<5,>=3.1.4 (from google-auth>=1.0.1->kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading rsa-4.9-py3-none-any.whl.metadata (4.2 kB)
+
+INFO: pip is looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+
+Collecting grpcio-status!=1.45.0,>=1.43 (from lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading grpcio_status-1.67.0-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.66.2-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.66.1-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.66.0-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.65.5-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.65.4-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.65.2-py3-none-any.whl.metadata (1.1 kB)
+
+INFO: pip is still looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+
+  Downloading grpcio_status-1.65.1-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.64.3-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.64.1-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.64.0-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.63.2-py3-none-any.whl.metadata (1.1 kB)
+
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+
+  Downloading grpcio_status-1.63.0-py3-none-any.whl.metadata (1.1 kB)
+
+  Downloading grpcio_status-1.62.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.62.2-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.62.1-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.62.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.61.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.60.2-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.60.1-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.60.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.59.5-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.59.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.59.2-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.59.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.58.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.58.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.57.0-py3-none-any.whl.metadata (1.2 kB)
+
+  Downloading grpcio_status-1.56.2-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.56.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.55.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.54.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.54.2-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.54.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.53.2-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.53.1-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.53.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.51.3-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.51.1-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.50.0-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.49.1-py3-none-any.whl.metadata (1.3 kB)
+
+  Downloading grpcio_status-1.48.2-py3-none-any.whl.metadata (1.2 kB)
+
+Requirement already satisfied: platformdirs>=2.5 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from jupyter-core!=5.0.*,>=4.12->nbformat->snakemake) (4.3.6)
+
+Collecting jaraco.classes (from keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading jaraco.classes-3.4.0-py3-none-any.whl.metadata (2.6 kB)
+
+Collecting jaraco.functools (from keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading jaraco.functools-4.1.0-py3-none-any.whl.metadata (2.9 kB)
+
+Collecting jaraco.context (from keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading jaraco.context-6.0.1-py3-none-any.whl.metadata (4.1 kB)
+
+Collecting importlib-metadata>=4.11.4 (from keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading importlib_metadata-8.5.0-py3-none-any.whl.metadata (4.8 kB)
+
+Collecting SecretStorage>=3.2 (from keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading SecretStorage-3.3.3-py3-none-any.whl.metadata (4.0 kB)
+
+Collecting jeepney>=0.4.2 (from keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading jeepney-0.8.0-py3-none-any.whl.metadata (1.3 kB)
+
+Requirement already satisfied: multidict>=4.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from yarl<2.0,>=1.6->gql<4.0.0,>=3.5.0->latch==2.54.0a8) (6.1.0)
+
+Requirement already satisfied: propcache>=0.2.0 in /root/mambaforge/envs/cartography_tidy/lib/python3.11/site-packages (from yarl<2.0,>=1.6->gql<4.0.0,>=3.5.0->latch==2.54.0a8) (0.2.0)
+
+Collecting chardet>=3.0.2 (from binaryornot>=0.4.4->cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading chardet-5.2.0-py3-none-any.whl.metadata (3.4 kB)
+
+Collecting pycparser (from cffi>=1.12->cryptography>=3.1->asyncssh==2.13.2->latch==2.54.0a8)
+
+  Downloading pycparser-2.22-py3-none-any.whl.metadata (943 bytes)
+
+Collecting zipp>=3.20 (from importlib-metadata>=4.11.4->keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading zipp-3.21.0-py3-none-any.whl.metadata (3.7 kB)
+
+Collecting pyasn1<0.7.0,>=0.4.6 (from pyasn1-modules>=0.2.1->google-auth>=1.0.1->kubernetes>=24.2.0->latch==2.54.0a8)
+
+  Downloading pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+
+Collecting text-unidecode>=1.3 (from python-slugify>=4.0.0->cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading text_unidecode-1.3-py2.py3-none-any.whl.metadata (2.4 kB)
+
+Collecting mypy-extensions>=0.3.0 (from typing-inspect>=0.4.0->dataclasses-json<=0.5.6,>=0.5.2->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading mypy_extensions-1.0.0-py3-none-any.whl.metadata (1.1 kB)
+
+Collecting types-python-dateutil>=2.8.10 (from arrow->cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading types_python_dateutil-2.9.0.20241003-py3-none-any.whl.metadata (1.9 kB)
+
+Collecting more-itertools (from jaraco.classes->keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading more_itertools-10.5.0-py3-none-any.whl.metadata (36 kB)
+
+Collecting backports.tarfile (from jaraco.context->keyring>=18.0.1->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading backports.tarfile-1.2.0-py3-none-any.whl.metadata (2.0 kB)
+
+Collecting markdown-it-py>=2.2.0 (from rich->cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
+
+Collecting pygments<3.0.0,>=2.13.0 (from rich->cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading pygments-2.18.0-py3-none-any.whl.metadata (2.5 kB)
+
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->cookiecutter>=1.7.3->lytekit==0.15.14->latch==2.54.0a8)
+
+  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+
+Downloading latch-2.54.0a8-py3-none-any.whl (277 kB)
+
+Downloading aioconsole-0.6.1-py3-none-any.whl (30 kB)
+
+Downloading asyncssh-2.13.2-py3-none-any.whl (349 kB)
+
+Downloading GitPython-3.1.40-py3-none-any.whl (190 kB)
+
+Downloading graphql_core-3.2.3-py3-none-any.whl (202 kB)
+
+Downloading lytekit-0.15.14-py3-none-any.whl (385 kB)
+
+Downloading lytekitplugins_pods-0.6.2-py3-none-any.whl (4.3 kB)
+
+Downloading watchfiles-0.19.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 22.0 MB/s eta 0:00:00
+
+
+Downloading websockets-11.0.3-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (130 kB)
+
+Using cached latch_persistence-0.1.0-py3-none-any.whl (5.4 kB)
+
+Downloading lyteidl-0.2.1-py3-none-any.whl (206 kB)
+
+Downloading retry-0.9.2-py2.py3-none-any.whl (8.0 kB)
+
+Using cached snakemake-8.25.3-py3-none-any.whl (1.0 MB)
+
+Downloading APScheduler-3.10.4-py3-none-any.whl (59 kB)
+
+Downloading boto3-1.35.59-py3-none-any.whl (139 kB)
+
+Downloading click-8.1.7-py3-none-any.whl (97 kB)
+
+Using cached conda_inject-1.3.2-py3-none-any.whl (4.1 kB)
+
+Downloading docker-7.1.0-py3-none-any.whl (147 kB)
+
+Using cached dpath-2.2.0-py3-none-any.whl (17 kB)
+
+Using cached jinja2-3.1.4-py3-none-any.whl (133 kB)
+
+Using cached jsonschema-4.23.0-py3-none-any.whl (88 kB)
+
+Downloading kubernetes-31.0.0-py2.py3-none-any.whl (1.9 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 28.8 MB/s eta 0:00:00
+
+
+Downloading paramiko-3.5.0-py3-none-any.whl (227 kB)
+
+Using cached PuLP-2.9.0-py3-none-any.whl (17.7 MB)
+
+Downloading PyJWT-2.9.0-py3-none-any.whl (22 kB)
+
+Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 763.0/763.0 kB 33.5 MB/s eta 0:00:00
+
+
+Using cached requests-2.32.3-py3-none-any.whl (64 kB)
+
+Downloading scp-0.15.0-py2.py3-none-any.whl (8.8 kB)
+
+Using cached smart_open-7.0.5-py3-none-any.whl (61 kB)
+
+Using cached snakemake_interface_report_plugins-1.1.0-py3-none-any.whl (7.1 kB)
+
+Using cached snakemake_interface_storage_plugins-3.3.0-py3-none-any.whl (15 kB)
+
+Using cached reretry-0.11.8-py2.py3-none-any.whl (5.6 kB)
+
+Downloading typing_extensions-4.12.2-py3-none-any.whl (37 kB)
+
+Using cached yte-1.5.4-py3-none-any.whl (7.7 kB)
+
+Downloading docutils-0.21.2-py3-none-any.whl (587 kB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 587.4/587.4 kB 25.3 MB/s eta 0:00:00
+
+
+Using cached humanfriendly-10.0-py2.py3-none-any.whl (86 kB)
+
+Using cached immutables-0.21-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (99 kB)
+
+Using cached nbformat-5.10.4-py3-none-any.whl (78 kB)
+
+Using cached psutil-6.1.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (287 kB)
+
+Using cached tabulate-0.9.0-py3-none-any.whl (35 kB)
+
+Downloading bcrypt-4.2.0-cp39-abi3-manylinux_2_28_x86_64.whl (273 kB)
+
+Downloading botocore-1.35.59-py3-none-any.whl (12.8 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 27.8 MB/s eta 0:00:00
+
+
+Downloading cloudpickle-3.1.0-py3-none-any.whl (22 kB)
+
+Downloading cookiecutter-2.6.0-py3-none-any.whl (39 kB)
+
+Downloading croniter-3.0.4-py2.py3-none-any.whl (23 kB)
+
+Downloading cryptography-43.0.3-cp39-abi3-manylinux_2_28_x86_64.whl (4.0 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.0/4.0 MB 26.3 MB/s eta 0:00:00
+
+Downloading dataclasses_json-0.5.6-py3-none-any.whl (25 kB)
+
+Downloading Deprecated-1.2.14-py2.py3-none-any.whl (9.6 kB)
+
+Downloading diskcache-5.6.3-py3-none-any.whl (45 kB)
+
+Downloading docker_image_py-0.1.13-py3-none-any.whl (8.9 kB)
+
+Downloading docstring_parser-0.16-py3-none-any.whl (36 kB)
+
+Downloading durationpy-0.9-py3-none-any.whl (3.5 kB)
+
+Using cached fastjsonschema-2.20.0-py3-none-any.whl (23 kB)
+
+Using cached gitdb-4.0.11-py3-none-any.whl (62 kB)
+
+Downloading google_auth-2.36.0-py2.py3-none-any.whl (209 kB)
+
+Downloading grpcio-1.67.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.9 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.9/5.9 MB 30.0 MB/s eta 0:00:00
+
+
+Downloading grpcio_status-1.48.2-py3-none-any.whl (14 kB)
+
+Using cached jmespath-1.0.1-py3-none-any.whl (20 kB)
+
+Using cached jsonschema_specifications-2024.10.1-py3-none-any.whl (18 kB)
+
+Using cached jupyter_core-5.7.2-py3-none-any.whl (28 kB)
+
+Downloading keyring-25.5.0-py3-none-any.whl (39 kB)
+
+Using cached MarkupSafe-3.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+
+Downloading marshmallow_enum-1.5.1-py2.py3-none-any.whl (4.2 kB)
+
+Downloading marshmallow_jsonschema-0.13.0-py3-none-any.whl (11 kB)
+
+Downloading natsort-8.4.0-py3-none-any.whl (38 kB)
+
+Downloading oauthlib-3.2.2-py3-none-any.whl (151 kB)
+
+Using cached plac-1.4.3-py2.py3-none-any.whl (22 kB)
+
+Downloading protobuf-3.20.3-py2.py3-none-any.whl (162 kB)
+
+Downloading PyNaCl-1.5.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (856 kB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 856.7/856.7 kB 27.6 MB/s eta 0:00:00
+
+
+Downloading python_json_logger-2.0.7-py3-none-any.whl (8.1 kB)
+
+Downloading pytimeparse-1.1.8-py2.py3-none-any.whl (10.0 kB)
+
+Using cached referencing-0.35.1-py3-none-any.whl (26 kB)
+
+Downloading responses-0.25.3-py3-none-any.whl (55 kB)
+
+Using cached rpds_py-0.21.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (360 kB)
+
+Downloading s3transfer-0.10.3-py3-none-any.whl (82 kB)
+
+Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+
+Downloading statsd-3.3.0-py2.py3-none-any.whl (11 kB)
+
+Using cached traitlets-5.14.3-py3-none-any.whl (85 kB)
+
+Downloading tzlocal-5.2-py3-none-any.whl (17 kB)
+
+Downloading websocket_client-1.8.0-py3-none-any.whl (58 kB)
+
+Downloading requests_oauthlib-2.0.0-py2.py3-none-any.whl (24 kB)
+
+Downloading binaryornot-0.4.4-py2.py3-none-any.whl (9.0 kB)
+
+Downloading cachetools-5.5.0-py3-none-any.whl (9.5 kB)
+
+Downloading cffi-1.17.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (467 kB)
+
+Downloading decorator-5.1.1-py3-none-any.whl (9.1 kB)
+
+Downloading googleapis_common_protos-1.66.0-py2.py3-none-any.whl (221 kB)
+
+Downloading importlib_metadata-8.5.0-py3-none-any.whl (26 kB)
+
+Downloading jeepney-0.8.0-py3-none-any.whl (48 kB)
+
+Downloading marshmallow-3.23.1-py3-none-any.whl (49 kB)
+
+Downloading py-1.11.0-py2.py3-none-any.whl (98 kB)
+
+Downloading pyasn1_modules-0.4.1-py3-none-any.whl (181 kB)
+
+Downloading python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)
+
+Downloading regex-2024.11.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (792 kB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 792.7/792.7 kB 25.5 MB/s eta 0:00:00
+
+Downloading rsa-4.9-py3-none-any.whl (34 kB)
+
+Downloading SecretStorage-3.3.3-py3-none-any.whl (15 kB)
+
+Using cached smmap-5.0.1-py3-none-any.whl (24 kB)
+
+Downloading typing_inspect-0.9.0-py3-none-any.whl (8.8 kB)
+
+Downloading arrow-1.3.0-py3-none-any.whl (66 kB)
+
+Downloading jaraco.classes-3.4.0-py3-none-any.whl (6.8 kB)
+
+Downloading jaraco.context-6.0.1-py3-none-any.whl (6.8 kB)
+
+Downloading jaraco.functools-4.1.0-py3-none-any.whl (10 kB)
+
+Downloading protoc_gen_swagger-0.1.0-py2.py3-none-any.whl (9.4 kB)
+
+Downloading rich-13.9.4-py3-none-any.whl (242 kB)
+
+Downloading chardet-5.2.0-py3-none-any.whl (199 kB)
+
+Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+
+Downloading mypy_extensions-1.0.0-py3-none-any.whl (4.7 kB)
+
+Downloading pyasn1-0.6.1-py3-none-any.whl (83 kB)
+
+Downloading pygments-2.18.0-py3-none-any.whl (1.2 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 33.8 MB/s eta 0:00:00
+
+
+Downloading text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
+
+Downloading types_python_dateutil-2.9.0.20241003-py3-none-any.whl (9.7 kB)
+
+Downloading zipp-3.21.0-py3-none-any.whl (9.6 kB)
+
+Downloading backports.tarfile-1.2.0-py3-none-any.whl (30 kB)
+
+Downloading more_itertools-10.5.0-py3-none-any.whl (60 kB)
+
+Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+
+Installing collected packages: text-unidecode, statsd, sortedcontainers, pytimeparse, plac, fastjsonschema, durationpy, connection-pool, zipp, websockets, websocket-client, tzlocal, typing-extensions, types-python-dateutil, traitlets, tabulate, smmap, smart-open, rpds-py, reretry, requests, regex, pyyaml, python-slugify, python-json-logger, pyjwt, pygments, pycparser, pyasn1, py, pulp, psutil, protobuf, oauthlib, natsort, mypy-extensions, more-itertools, mdurl, marshmallow, MarkupSafe, jmespath, jeepney, immutables, humanfriendly, grpcio, graphql-core, dpath, docutils, docstring-parser, diskcache, deprecated, decorator, datrie, cloudpickle, click, chardet, cachetools, bcrypt, backports.tarfile, aioconsole, yte, watchfiles, typing-inspect, snakemake-interface-storage-plugins, snakemake-interface-report-plugins, rsa, retry, responses, requests-oauthlib, referencing, pyasn1-modules, protoc-gen-swagger, marshmallow-jsonschema, marshmallow-enum, markdown-it-py, latch-persistence, jupyter-core, jinja2, jaraco.functools, jaraco.context, jaraco.classes, importlib-metadata, googleapis-common-protos, gitdb, docker-image-py, docker, croniter, conda-inject, cffi, botocore, binaryornot, arrow, apscheduler, s3transfer, rich, pynacl, lyteidl, jsonschema-specifications, grpcio-status, google-auth, gitpython, dataclasses-json, cryptography, SecretStorage, paramiko, kubernetes, jsonschema, cookiecutter, boto3, asyncssh, scp, nbformat, keyring, snakemake, lytekit, lytekitplugins-pods, latch
+
+  Attempting uninstall: requests
+
+    Found existing installation: requests 2.29.0
+
+    Uninstalling requests-2.29.0:
+
+      Successfully uninstalled requests-2.29.0
+
+  Attempting uninstall: graphql-core
+
+    Found existing installation: graphql-core 3.2.5
+
+    Uninstalling graphql-core-3.2.5:
+
+      Successfully uninstalled graphql-core-3.2.5
+
+Successfully installed MarkupSafe-3.0.2 SecretStorage-3.3.3 aioconsole-0.6.1 apscheduler-3.10.4 arrow-1.3.0 asyncssh-2.13.2 backports.tarfile-1.2.0 bcrypt-4.2.0 binaryornot-0.4.4 boto3-1.35.59 botocore-1.35.59 cachetools-5.5.0 cffi-1.17.1 chardet-5.2.0 click-8.1.7 cloudpickle-3.1.0 conda-inject-1.3.2 connection-pool-0.0.3 cookiecutter-2.6.0 croniter-3.0.4 cryptography-43.0.3 dataclasses-json-0.5.6 datrie-0.8.2 decorator-5.1.1 deprecated-1.2.14 diskcache-5.6.3 docker-7.1.0 docker-image-py-0.1.13 docstring-parser-0.16 docutils-0.21.2 dpath-2.2.0 durationpy-0.9 fastjsonschema-2.20.0 gitdb-4.0.11 gitpython-3.1.40 google-auth-2.36.0 googleapis-common-protos-1.66.0 graphql-core-3.2.3 grpcio-1.67.1 grpcio-status-1.48.2 humanfriendly-10.0 immutables-0.21 importlib-metadata-8.5.0 jaraco.classes-3.4.0 jaraco.context-6.0.1 jaraco.functools-4.1.0 jeepney-0.8.0 jinja2-3.1.4 jmespath-1.0.1 jsonschema-4.23.0 jsonschema-specifications-2024.10.1 jupyter-core-5.7.2 keyring-25.5.0 kubernetes-31.0.0 latch-2.54.0a8 latch-persistence-0.1.0 lyteidl-0.2.1 lytekit-0.15.14 lytekitplugins-pods-0.6.2 markdown-it-py-3.0.0 marshmallow-3.23.1 marshmallow-enum-1.5.1 marshmallow-jsonschema-0.13.0 mdurl-0.1.2 more-itertools-10.5.0 mypy-extensions-1.0.0 natsort-8.4.0 nbformat-5.10.4 oauthlib-3.2.2 paramiko-3.5.0 plac-1.4.3 protobuf-3.20.3 protoc-gen-swagger-0.1.0 psutil-6.1.0 pulp-2.9.0 py-1.11.0 pyasn1-0.6.1 pyasn1-modules-0.4.1 pycparser-2.22 pygments-2.18.0 pyjwt-2.9.0 pynacl-1.5.0 python-json-logger-2.0.7 python-slugify-8.0.4 pytimeparse-1.1.8 pyyaml-6.0.2 referencing-0.35.1 regex-2024.11.6 requests-2.32.3 requests-oauthlib-2.0.0 reretry-0.11.8 responses-0.25.3 retry-0.9.2 rich-13.9.4 rpds-py-0.21.0 rsa-4.9 s3transfer-0.10.3 scp-0.15.0 smart-open-7.0.5 smmap-5.0.1 snakemake-8.25.3 snakemake-interface-report-plugins-1.1.0 snakemake-interface-storage-plugins-3.3.0 sortedcontainers-2.4.0 statsd-3.3.0 tabulate-0.9.0 text-unidecode-1.3 traitlets-5.14.3 types-python-dateutil-2.9.0.20241003 typing-extensions-4.12.2 typing-inspect-0.9.0 tzlocal-5.2 watchfiles-0.19.0 websocket-client-1.8.0 websockets-11.0.3 yte-1.5.4 zipp-3.21.0
+
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m
+ ---> 0f761fed4f46
+
+Step 17/22 : env LATCH_SDK_DOMAIN ligma.ai
+
+
+ ---> Running in cecb6493ddf3
+
+ ---> 2c89aacb95e3
+
+Step 18/22 : env LATCH_AUTHENTICATION_ENDPOINT https://nucleus.ligma.ai
+
+
+ ---> Running in 0ffa25a6a2c4
+
+ ---> 4af13113cbf9
+
+Step 19/22 : copy . /root/
+
+
+ ---> 7d4072ce8151
+
+Step 20/22 : arg tag
+
+
+ ---> Running in 5361b2f9d214
+
+ ---> 05af15c8e964
+
+Step 21/22 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in bbdbcd703e40
+
+ ---> 263b15106428
+
+Step 22/22 : workdir /root
+
+
+ ---> Running in 7e258e3ac0b6
+
+ ---> b7dede9ea59f
+
+Successfully built b7dede9ea59f
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/38_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:0.3.7
+

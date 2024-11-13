@@ -1,0 +1,126 @@
+Step 1/18 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base-snakemake:0.1.0
+
+
+ ---> 1e5e51399e11
+
+Step 2/18 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> a2fe8f5de25e
+
+Step 3/18 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> 2f50b1c6ffcd
+
+Step 4/18 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 6e333bcbf09d
+
+Step 5/18 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 50828948253a
+
+Step 6/18 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> 8eac2f1ad665
+
+Step 7/18 : run pip install latch==2.54.0a8
+
+
+ ---> Using cache
+
+ ---> 264b02defe04
+
+Step 8/18 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> f07bf9ffb48b
+
+Step 9/18 : copy snakemake_executor_plugin_latch /root/snakemake_executor_plugin_latch
+
+
+ ---> Using cache
+
+ ---> dbe947f4c7c3
+
+Step 10/18 : run pip install /root/snakemake_executor_plugin_latch
+
+
+ ---> Using cache
+
+ ---> aaebf1f6f2a6
+
+Step 11/18 : run curl -L -O     https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh     && mkdir /root/.conda     && bash Mambaforge-Linux-x86_64.sh -b     && rm -f Mambaforge-Linux-x86_64.sh
+
+
+ ---> Using cache
+
+ ---> 076bf1abfa63
+
+Step 12/18 : env PATH $PATH:/root/mambaforge/bin
+
+
+ ---> Using cache
+
+ ---> e03e710ecf9d
+
+Step 13/18 : env LATCH_SDK_DOMAIN ligma.ai
+
+
+ ---> Using cache
+
+ ---> 9d6dc7d18a2f
+
+Step 14/18 : env LATCH_AUTHENTICATION_ENDPOINT https://nucleus.ligma.ai
+
+
+ ---> Using cache
+
+ ---> 90b02d9a0e1d
+
+Step 15/18 : copy . /root/
+
+
+ ---> 3a4bc9f234b0
+
+Step 16/18 : arg tag
+
+
+ ---> Running in b85c3a811ebf
+
+ ---> 044b9a09d2db
+
+Step 17/18 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in 0a7d4601cb5a
+
+ ---> 068cc4e9c555
+
+Step 18/18 : workdir /root
+
+
+ ---> Running in 4f8ee09b5199
+
+ ---> 153b8a11b9a3
+
+Successfully built 153b8a11b9a3
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/38_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:0.3.6
+

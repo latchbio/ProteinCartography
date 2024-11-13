@@ -1,0 +1,154 @@
+Step 1/22 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base-snakemake:0.1.0
+
+
+ ---> 1e5e51399e11
+
+Step 2/22 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> a2fe8f5de25e
+
+Step 3/22 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> 2f50b1c6ffcd
+
+Step 4/22 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 6e333bcbf09d
+
+Step 5/22 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 50828948253a
+
+Step 6/22 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> 8eac2f1ad665
+
+Step 7/22 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> d7dca7350e2c
+
+Step 8/22 : run apt-get update && apt-get install -y git
+
+
+ ---> Using cache
+
+ ---> 7b9c989ff56f
+
+Step 9/22 : run curl -L -O     https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh     && mkdir /root/.conda     && bash Mambaforge-Linux-x86_64.sh -b     && rm -f Mambaforge-Linux-x86_64.sh
+
+
+ ---> Using cache
+
+ ---> 0aff1ecc2c5f
+
+Step 10/22 : env PATH /root/mambaforge/bin:$PATH
+
+
+ ---> Using cache
+
+ ---> 8ce2bb853770
+
+Step 11/22 : copy envs/cartography_tidy.yml /root/envs/cartography_tidy.yml
+
+
+ ---> Using cache
+
+ ---> bdb9e5036b9d
+
+Step 12/22 : run mamba env create -f /root/envs/cartography_tidy.yml -n cartography_tidy
+
+
+ ---> Using cache
+
+ ---> ee0b343c46a2
+
+Step 13/22 : env PATH /root/mambaforge/envs/cartography_tidy/bin:$PATH
+
+
+ ---> Using cache
+
+ ---> f84d152691e4
+
+Step 14/22 : copy snakemake_executor_plugin_latch /root/snakemake_executor_plugin_latch
+
+
+ ---> Using cache
+
+ ---> 96ffd883b9ea
+
+Step 15/22 : run pip install /root/snakemake_executor_plugin_latch
+
+
+ ---> Using cache
+
+ ---> bd49a2319f37
+
+Step 16/22 : run pip install latch==2.54.0a8 snakemake snakemake_storage_plugin_latch
+
+
+ ---> Using cache
+
+ ---> 0543f3699e69
+
+Step 17/22 : env LATCH_SDK_DOMAIN ligma.ai
+
+
+ ---> Using cache
+
+ ---> da99c7948975
+
+Step 18/22 : env LATCH_AUTHENTICATION_ENDPOINT https://nucleus.ligma.ai
+
+
+ ---> Using cache
+
+ ---> 2eabad322ddd
+
+Step 19/22 : copy . /root/
+
+
+ ---> d174c1d745f8
+
+Step 20/22 : arg tag
+
+
+ ---> Running in 2960a49cd079
+
+ ---> aafd4b76c38b
+
+Step 21/22 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in 0fe9fa3f95e6
+
+ ---> 7faad116ec5d
+
+Step 22/22 : workdir /root
+
+
+ ---> Running in 94875157f33f
+
+ ---> 66997929a9ab
+
+Successfully built 66997929a9ab
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/38_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:0.3.10
+

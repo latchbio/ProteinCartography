@@ -1,0 +1,208 @@
+Step 1/14 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base-snakemake:0.1.0
+
+
+ ---> 1e5e51399e11
+
+Step 2/14 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> a2fe8f5de25e
+
+Step 3/14 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> 2f50b1c6ffcd
+
+Step 4/14 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 6e333bcbf09d
+
+Step 5/14 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 50828948253a
+
+Step 6/14 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> 8eac2f1ad665
+
+Step 7/14 : run pip install latch==2.54.0a8
+
+
+ ---> Using cache
+
+ ---> 264b02defe04
+
+Step 8/14 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> f07bf9ffb48b
+
+Step 9/14 : copy snakemake_executor_plugin_latch /root/snakemake_executor_plugin_latch
+
+
+ ---> dbe947f4c7c3
+
+Step 10/14 : run pip install /root/snakemake_executor_plugin_latch
+
+
+ ---> Running in 07bf928c7903
+
+[91mpip install /root/snakemake_executor_plugin_latch
+[0m
+Processing /root/snakemake_executor_plugin_latch
+
+  Installing build dependencies: started
+
+  Installing build dependencies: finished with status 'done'
+
+  Getting requirements to build wheel: started
+
+  Getting requirements to build wheel: finished with status 'done'
+
+  Preparing metadata (pyproject.toml): started
+
+  Preparing metadata (pyproject.toml): finished with status 'done'
+
+Collecting aiohttp<4.0.0,>=3.10.10 (from snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading aiohttp-3.10.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.6 kB)
+
+Requirement already satisfied: gql<4.0.0,>=3.5.0 in /usr/local/lib/python3.11/site-packages (from snakemake-executor-plugin-latch==0.1.0) (3.5.0)
+
+Requirement already satisfied: python-dateutil<3.0.0,>=2.9.0.post0 in /usr/local/lib/python3.11/site-packages (from snakemake-executor-plugin-latch==0.1.0) (2.9.0.post0)
+
+Requirement already satisfied: requests-toolbelt<2.0.0,>=1.0.0 in /usr/local/lib/python3.11/site-packages (from snakemake-executor-plugin-latch==0.1.0) (1.0.0)
+
+Requirement already satisfied: snakemake-interface-executor-plugins<10.0.0,>=9.3.2 in /usr/local/lib/python3.11/site-packages (from snakemake-executor-plugin-latch==0.1.0) (9.3.2)
+
+Collecting aiohappyeyeballs>=2.3.0 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading aiohappyeyeballs-2.4.3-py3-none-any.whl.metadata (6.1 kB)
+
+Collecting aiosignal>=1.1.2 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading aiosignal-1.3.1-py3-none-any.whl.metadata (4.0 kB)
+
+Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.11/site-packages (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0) (24.2.0)
+
+Collecting frozenlist>=1.1.1 (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0)
+
+  Downloading frozenlist-1.5.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (13 kB)
+
+Requirement already satisfied: multidict<7.0,>=4.5 in /usr/local/lib/python3.11/site-packages (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0) (6.1.0)
+
+Requirement already satisfied: yarl<2.0,>=1.12.0 in /usr/local/lib/python3.11/site-packages (from aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0) (1.17.1)
+
+Requirement already satisfied: graphql-core<3.3,>=3.2 in /usr/local/lib/python3.11/site-packages (from gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0) (3.2.3)
+
+Requirement already satisfied: backoff<3.0,>=1.11.1 in /usr/local/lib/python3.11/site-packages (from gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0) (2.2.1)
+
+Requirement already satisfied: anyio<5,>=3.0 in /usr/local/lib/python3.11/site-packages (from gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0) (4.6.2.post1)
+
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/site-packages (from python-dateutil<3.0.0,>=2.9.0.post0->snakemake-executor-plugin-latch==0.1.0) (1.16.0)
+
+Requirement already satisfied: requests<3.0.0,>=2.0.1 in /usr/local/lib/python3.11/site-packages (from requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (2.32.3)
+
+Requirement already satisfied: argparse-dataclass<3.0.0,>=2.0.0 in /usr/local/lib/python3.11/site-packages (from snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0) (2.0.0)
+
+Requirement already satisfied: snakemake-interface-common<2.0.0,>=1.17.4 in /usr/local/lib/python3.11/site-packages (from snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0) (1.17.4)
+
+Requirement already satisfied: throttler<2.0.0,>=1.2.2 in /usr/local/lib/python3.11/site-packages (from snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0) (1.2.2)
+
+Requirement already satisfied: idna>=2.8 in /usr/local/lib/python3.11/site-packages (from anyio<5,>=3.0->gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0) (3.10)
+
+Requirement already satisfied: sniffio>=1.1 in /usr/local/lib/python3.11/site-packages (from anyio<5,>=3.0->gql<4.0.0,>=3.5.0->snakemake-executor-plugin-latch==0.1.0) (1.3.1)
+
+Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.11/site-packages (from requests<3.0.0,>=2.0.1->requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (3.4.0)
+
+Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.11/site-packages (from requests<3.0.0,>=2.0.1->requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (1.26.20)
+
+Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.11/site-packages (from requests<3.0.0,>=2.0.1->requests-toolbelt<2.0.0,>=1.0.0->snakemake-executor-plugin-latch==0.1.0) (2024.8.30)
+
+Requirement already satisfied: ConfigArgParse<2.0,>=1.7 in /usr/local/lib/python3.11/site-packages (from snakemake-interface-common<2.0.0,>=1.17.4->snakemake-interface-executor-plugins<10.0.0,>=9.3.2->snakemake-executor-plugin-latch==0.1.0) (1.7)
+
+Requirement already satisfied: propcache>=0.2.0 in /usr/local/lib/python3.11/site-packages (from yarl<2.0,>=1.12.0->aiohttp<4.0.0,>=3.10.10->snakemake-executor-plugin-latch==0.1.0) (0.2.0)
+
+Downloading aiohttp-3.10.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 16.0 MB/s eta 0:00:00
+
+
+Downloading aiohappyeyeballs-2.4.3-py3-none-any.whl (14 kB)
+
+Downloading aiosignal-1.3.1-py3-none-any.whl (7.6 kB)
+
+Downloading frozenlist-1.5.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (274 kB)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 274.9/274.9 kB 17.3 MB/s eta 0:00:00
+
+
+Building wheels for collected packages: snakemake-executor-plugin-latch
+
+  Building wheel for snakemake-executor-plugin-latch (pyproject.toml): started
+
+  Building wheel for snakemake-executor-plugin-latch (pyproject.toml): finished with status 'done'
+
+  Created wheel for snakemake-executor-plugin-latch: filename=snakemake_executor_plugin_latch-0.1.0-py3-none-any.whl size=4832 sha256=d75f24723cd317a2ef8d7d25bc56b55fa1dabd1f1f4d0c1a93fbde78afeb5c01
+
+  Stored in directory: /tmp/pip-ephem-wheel-cache-n_dgju8j/wheels/c6/06/55/ed7bda4e3dc7c4a768e42bfc4dd936378cef4fcc36386dfd0f
+
+Successfully built snakemake-executor-plugin-latch
+
+Installing collected packages: frozenlist, aiohappyeyeballs, aiosignal, aiohttp, snakemake-executor-plugin-latch
+
+Successfully installed aiohappyeyeballs-2.4.3 aiohttp-3.10.10 aiosignal-1.3.1 frozenlist-1.5.0 snakemake-executor-plugin-latch-0.1.0
+
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0m
+[91m
+[notice] A new release of pip is available: 24.0 -> 24.3.1
+[notice] To update, run: pip install --upgrade pip
+[0m
+ ---> aaebf1f6f2a6
+
+Step 11/14 : copy . /root/
+
+
+ ---> 8d49cebcd202
+
+Step 12/14 : arg tag
+
+
+ ---> Running in c835bc424b98
+
+ ---> 2b12ba38212f
+
+Step 13/14 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in e67f11997c03
+
+ ---> e771e94b24a1
+
+Step 14/14 : workdir /root
+
+
+ ---> Running in 4ece6aa3efa5
+
+ ---> ac205f124325
+
+Successfully built ac205f124325
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/38_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:0.3.1
+

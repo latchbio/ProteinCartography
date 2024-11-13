@@ -15,8 +15,8 @@ mode: "search"
 
 # The input and output directories
 # (usually, we place the output directory inside the input directory)
-input_dir: "input/"
-output_dir: "input/output/"
+input_dir: "latch://38.account/arcadia-data/input"
+output_dir: "latch://38.account/arcadia-outputs"
 
 # The name for the analysis; this is used to prefix the names of the final output files
 analysis_name: "example"
@@ -114,7 +114,8 @@ taxon_focus: 'euk'
 # Resource execution settings
 # ------------------------------------------------------------------------------------------------
 resources:
-    mem_mb: 16 * 1000
+    mem_mb: 4096
+    cores: 2
 cores: 8
 max-jobs-per-second: 1
 max-status-checks-per-second: 10
