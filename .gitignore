@@ -84,4 +84,4 @@ venv/
 .nextflow*
 work/
 .venv
-# .latch
+.latch
