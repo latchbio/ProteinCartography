@@ -23,10 +23,10 @@ MODE = config_utils.Mode(config["mode"])
 
 # basic configuration parameters common to both search and cluster modes
 input_dir = LPath(config["input_dir"])
-config["input_dir"] = str(input_dir.download(Path("/root/input")))
+config["input_dir"] = str(input_dir.download(Path("/snakemake-workdir/input")))
 
 INPUT_DIR = Path(config["input_dir"])
-OUTPUT_DIR = config["output_dir"]
+OUTPUT_DIR = storage.latch(config["output_dir"])
 ANALYSIS_NAME = config["analysis_name"]
 TAXON_FOCUS = config["taxon_focus"]
 PLOTTING_MODES = config["plotting_modes"]
@@ -125,7 +125,7 @@ rule copy_pdb:
     input:
         os.path.join(INPUT_DIR, "{protid}.pdb"),
     output:
-        storage.latch(os.path.join(DOWNLOADED_PROTEIN_STRUCTURES_DIR, "{protid}.pdb")),
+        os.path.join(DOWNLOADED_PROTEIN_STRUCTURES_DIR, "{protid}.pdb"),
     shell:
         """
         cp {input} {output}
@@ -142,9 +142,9 @@ rule run_blast:
     input:
         fasta_file=os.path.join(INPUT_DIR, "{protid}.fasta"),
     output:
-        blast_results=storage.latch(os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_results.tsv")),
+        blast_results=os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_results.tsv"),
     benchmark:
-        storage.latch(os.path.join(BENCHMARKS_DIR, "{protid}.run_blast.txt"))
+        os.path.join(BENCHMARKS_DIR, "{protid}.run_blast.txt")
     conda:
         "envs/blast.yml"
     shell:
@@ -167,9 +167,9 @@ rule extract_blast_hits:
     input:
         blast_results=os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_results.tsv"),
     output:
-        blast_hits=storage.latch(os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_hits.refseq.txt")),
+        blast_hits=os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_hits.refseq.txt"),
     benchmark:
-        storage.latch(os.path.join(BENCHMARKS_DIR, "{protid}.extract_blast_hits.txt"))
+        os.path.join(BENCHMARKS_DIR, "{protid}.extract_blast_hits.txt")
     conda:
         "envs/pandas.yml"
     shell:
@@ -187,11 +187,9 @@ rule map_refseq_ids:
     input:
         blast_hits=rules.extract_blast_hits.output.blast_hits,
     output:
-        blast_hits_uniprot_ids=storage.latch(
-            os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_hits.uniprot.txt")
-        ),
+        blast_hits_uniprot_ids=os.path.join(BLAST_RESULTS_DIR, "{protid}.blast_hits.uniprot.txt"),
     benchmark:
-        storage.latch(os.path.join(BENCHMARKS_DIR, "{protid}.map_refseq_ids.txt"))
+        os.path.join(BENCHMARKS_DIR, "{protid}.map_refseq_ids.txt")
     conda:
         "envs/web_apis.yml"
     shell:
@@ -214,20 +212,16 @@ rule run_foldseek:
     input:
         pdb_file=os.path.join(INPUT_DIR, "{protid}.pdb"),
     output:
-        foldseek_output=storage.latch(
-            os.path.join(FOLDSEEK_RESULTS_DIR, "{protid}.fsresults.tar.gz")
-        ),
-        m8_files_dir=directory(storage.latch(os.path.join(FOLDSEEK_RESULTS_DIR, "{protid}"))),
-        m8_files=storage.latch(
-            expand(
-                os.path.join(FOLDSEEK_RESULTS_DIR, "{{protid}}", "alis_{db}.m8"),
-                db=FOLDSEEK_DATABASES,
-            )
+        foldseek_output=os.path.join(FOLDSEEK_RESULTS_DIR, "{protid}.fsresults.tar.gz"),
+        m8_files_dir=directory(os.path.join(FOLDSEEK_RESULTS_DIR, "{protid}")),
+        m8_files=expand(
+            os.path.join(FOLDSEEK_RESULTS_DIR, "{{protid}}", "alis_{db}.m8"),
+            db=FOLDSEEK_DATABASES,
         ),
     conda:
         "envs/web_apis.yml"
     benchmark:
-        storage.latch(os.path.join(BENCHMARKS_DIR, "{protid}.run_foldseek.txt"))
+        os.path.join(BENCHMARKS_DIR, "{protid}.run_foldseek.txt")
     shell:
         """
         python ProteinCartography/foldseek_apiquery.py \
@@ -243,9 +237,7 @@ rule extract_foldseek_hits:
     input:
         m8_files=rules.run_foldseek.output.m8_files,
     output:
-        foldseek_hits=storage.latch(
-            os.path.join(FOLDSEEK_RESULTS_DIR, "{protid}.foldseek_hits.txt")
-        ),
+        foldseek_hits=os.path.join(FOLDSEEK_RESULTS_DIR, "{protid}.foldseek_hits.txt"),
     conda:
         "envs/pandas.yml"
     shell:
@@ -268,11 +260,9 @@ rule aggregate_foldseek_fraction_seq_identity:
     input:
         m8_files=rules.run_foldseek.output.m8_files,
     output:
-        fident_features=storage.latch(
-            os.path.join(PROTEIN_FEATURES_DIR, "{protid}_fident_features.tsv")
-        ),
+        fident_features=os.path.join(PROTEIN_FEATURES_DIR, "{protid}_fident_features.tsv"),
     benchmark:
-        storage.latch(os.path.join(BENCHMARKS_DIR, "{protid}.aggregate_foldseek_fident.txt"))
+        os.path.join(BENCHMARKS_DIR, "{protid}.aggregate_foldseek_fident.txt")
     conda:
         "envs/pandas.yml"
     shell:
