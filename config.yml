@@ -6,7 +6,6 @@
 # and pass your new file to Snakemake using the --configfile flag.
 # (the parameters in the new config file will overwrite the defaults listed here)
 
-
 # ------------------------------------------------------------------------------------------------
 # Basic settings
 # ------------------------------------------------------------------------------------------------
@@ -21,7 +20,6 @@ output_dir: "latch://38.account/arcadia-outputs"
 # The name for the analysis; this is used to prefix the names of the final output files
 analysis_name: "example"
 
-
 # ------------------------------------------------------------------------------------------------
 # Search-mode settings
 # These settings are required in 'search' mode and ignored in 'cluster' mode
@@ -34,9 +32,9 @@ foldseek_server_url: "https://search.foldseek.com"
 # To avoid overloading the Foldseek server, we recommend limiting your search
 # to only the databases relevant to your query.
 foldseek_databases:
-- "afdb50"
-- "afdb-swissprot"
-- "afdb-proteome"
+  - "afdb50"
+  - "afdb-swissprot"
+  - "afdb-proteome"
 
 # The maximum number of Foldseek hits to retain
 # (the foldseek API does not provide a way to limit the number of Foldseek hits returned,
@@ -68,7 +66,6 @@ max_structures: 5000
 min_length: 0
 max_length: 0
 
-
 # ------------------------------------------------------------------------------------------------
 # Cluster-mode settings
 # These settings are required in 'cluster' mode and ignored in 'search' mode
@@ -85,7 +82,6 @@ features_file: "uniprot_features.tsv"
 # key_protids:
 # - 'P60709'
 
-
 # ------------------------------------------------------------------------------------------------
 # Features-related settings
 # ------------------------------------------------------------------------------------------------
@@ -95,27 +91,25 @@ features_file: "uniprot_features.tsv"
 # (if this file doesn't exist, this parameter is ignored)
 features_override_file: "features_override.tsv"
 
-
 # ------------------------------------------------------------------------------------------------
 # Plotting-related settings
 # ------------------------------------------------------------------------------------------------
 # The list of plotting modes to use (allowed values: "pca", "tsne", "umap", "pca_tsne", "pca_umap")
 plotting_modes:
-- "pca_tsne"
-- "pca_umap"
+  - "pca_tsne"
+  - "pca_umap"
 
 # The broad taxonomic groups that will be categorized in plots
 # Also accepts 'bac' which displays some large bacterial taxonomic groups
 # (see README.md for more details)
-taxon_focus: 'euk'
-
+taxon_focus: "euk"
 
 # ------------------------------------------------------------------------------------------------
 # Resource execution settings
 # ------------------------------------------------------------------------------------------------
-resources:
-    mem_mb: 4096
-    cores: 2
+default_resources:
+  mem_mb: 4096
+  cores: 2
 cores: 8
 max-jobs-per-second: 1
 max-status-checks-per-second: 10

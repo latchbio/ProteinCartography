@@ -147,6 +147,8 @@ def snakemake_runtime(
         "latch",
         "--jobs",
         "1000",
+        "--rerun-triggers",
+        "mtime",
         "--conda-frontend",
         "mamba",
         "--use-conda",

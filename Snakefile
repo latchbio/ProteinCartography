@@ -24,9 +24,10 @@ MODE = config_utils.Mode(config["mode"])
 # basic configuration parameters common to both search and cluster modes
 input_dir = LPath(config["input_dir"])
 config["input_dir"] = str(input_dir.download(Path("/snakemake-workdir/input")))
+config["output_dir"] = "/snakemake-workdir/output"
 
 INPUT_DIR = Path(config["input_dir"])
-OUTPUT_DIR = storage.latch(config["output_dir"])
+OUTPUT_DIR = config["output_dir"]
 ANALYSIS_NAME = config["analysis_name"]
 TAXON_FOCUS = config["taxon_focus"]
 PLOTTING_MODES = config["plotting_modes"]
@@ -472,6 +473,9 @@ rule calculate_key_protid_tmscores:
         key_protid_tmscores=os.path.join(PROTEIN_FEATURES_DIR, "key_protid_tmscore_features.tsv"),
     conda:
         "envs/foldseek.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "calculate_key_protid_tmscores.txt")
     shell:
@@ -516,6 +520,9 @@ rule leiden_clustering:
         leiden_features=os.path.join(FOLDSEEK_CLUSTERING_DIR, "leiden_features.tsv"),
     conda:
         "envs/analysis.yml"
+    resources:
+        mem_mb=8 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "leiden_clustering.txt")
     shell:
@@ -543,6 +550,9 @@ rule calculate_concordance:
         os.path.join(BENCHMARKS_DIR, "{protid}.calculate_concordance.txt")
     conda:
         "envs/pandas.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     shell:
         """
         python ProteinCartography/calculate_concordance.py \
@@ -626,6 +636,9 @@ rule aggregate_features:
         aggregated_features=os.path.join(
             FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features.tsv"
         ),
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "aggregate_features.txt")
     conda:
@@ -651,11 +664,14 @@ rule plot_interactive:
         tm_scores=rules.dim_reduction.output.all_by_all_tmscores,
         features=rules.aggregate_features.output.aggregated_features,
     output:
-        html=os.path.join(
+        html=storage.latch(os.path.join(
             FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html"
-        ),
+        )),
     conda:
         "envs/plotting.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "{plotting_mode}.plot_interactive.txt")
     shell:
@@ -682,12 +698,15 @@ rule plot_similarity_leiden:
         tm_scores=rules.foldseek_clustering.output.all_by_all_tmscores,
         features=rules.leiden_clustering.output.leiden_features,
     output:
-        tsv=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_leiden_similarity.tsv"),
-        html=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_leiden_similarity.html"),
+        tsv=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_leiden_similarity.tsv")),
+        html=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_leiden_similarity.html")),
     params:
         column="LeidenCluster",
     conda:
         "envs/plotting.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_similarity_leiden.txt")
     shell:
@@ -715,12 +734,15 @@ rule plot_similarity_strucluster:
         tm_scores=rules.foldseek_clustering.output.all_by_all_tmscores,
         features=rules.foldseek_clustering.output.struclusters_features,
     output:
-        tsv=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_strucluster_similarity.tsv"),
-        html=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_strucluster_similarity.html"),
+        tsv=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_strucluster_similarity.tsv")),
+        html=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_strucluster_similarity.html")),
     params:
         column="StruCluster",
     conda:
         "envs/plotting.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_similarity_strucluster.txt")
     shell:
@@ -741,13 +763,16 @@ rule plot_semantic_analysis:
     input:
         features=rules.aggregate_features.output.aggregated_features,
     output:
-        pdf=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_semantic_analysis.pdf"),
-        html=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_semantic_analysis.html"),
+        pdf=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_semantic_analysis.pdf")),
+        html=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_semantic_analysis.html")),
     params:
         agg_column="LeidenCluster",
         annot_column="'Protein names'",
     conda:
         "envs/plotting.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_semantic_analysis.txt")
     shell:
@@ -769,9 +794,12 @@ rule plot_cluster_distributions:
     input:
         features=rules.aggregate_features.output.aggregated_features,
     output:
-        svg=os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg"),
+        svg=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg")),
     conda:
         "envs/plotting.yml"
+    resources:
+        mem_mb=4 * 1024,
+    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_cluster_distributions_{protid}.txt")
     shell:
