@@ -24,10 +24,10 @@ MODE = config_utils.Mode(config["mode"])
 # basic configuration parameters common to both search and cluster modes
 input_dir = LPath(config["input_dir"])
 config["input_dir"] = str(input_dir.download(Path("/snakemake-workdir/input")))
-config["output_dir"] = "/snakemake-workdir/output"
 
 INPUT_DIR = Path(config["input_dir"])
-OUTPUT_DIR = config["output_dir"]
+OUTPUT_DIR = Path("/snakemake-workdir/output")
+REMOTE_OUTPUT_DIR = config["output_dir"]
 ANALYSIS_NAME = config["analysis_name"]
 TAXON_FOCUS = config["taxon_focus"]
 PLOTTING_MODES = config["plotting_modes"]
@@ -72,7 +72,8 @@ FOLDSEEK_CLUSTERING_DIR = os.path.join(OUTPUT_DIR, "foldseek_clustering_results"
 FOLDSEEK_TMSCORES_DIR = os.path.join(OUTPUT_DIR, "key_protid_tmscores_results")
 
 # final output results (plots and aggregated TSV files)
-FINAL_RESULTS_DIR = os.path.join(OUTPUT_DIR, "final_results")
+LOCAL_FINAL_RESULTS_DIR = os.path.join(OUTPUT_DIR, "final_results")
+FINAL_RESULTS_DIR = os.path.join(REMOTE_OUTPUT_DIR, "final_results")
 
 # search-mode-specific parameters
 # note: although these parameters are only used in search mode, we can assume they exist here
@@ -634,7 +635,7 @@ rule aggregate_features:
         get_aggregate_features_input,
     output:
         aggregated_features=os.path.join(
-            FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features.tsv"
+            LOCAL_FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features.tsv"
         ),
     resources:
         mem_mb=4 * 1024,
@@ -664,9 +665,7 @@ rule plot_interactive:
         tm_scores=rules.dim_reduction.output.all_by_all_tmscores,
         features=rules.aggregate_features.output.aggregated_features,
     output:
-        html=storage.latch(os.path.join(
-            FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html"
-        )),
+        html=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html")),
     conda:
         "envs/plotting.yml"
     resources:
@@ -810,7 +809,6 @@ rule plot_cluster_distributions:
             --keyid {wildcards.protid}
         """
 
-
 rule all:
     """
     This is a pseudo-rule that defines the final outputs of the pipeline
@@ -828,5 +826,15 @@ rule all:
         rules.plot_similarity_strucluster.output.html,
         rules.plot_semantic_analysis.output.html,
         rules.plot_semantic_analysis.output.pdf,
-        expand(rules.plot_interactive.output.html, plotting_mode=PLOTTING_MODES),
-        expand(rules.plot_cluster_distributions.output.svg, protid=KEY_PROTIDS),
+        storage.latch(
+            expand(
+                os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html"),
+                plotting_mode=PLOTTING_MODES
+            ),
+        ),
+        storage.latch(
+            expand(
+                os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg"),
+                protid=KEY_PROTIDS
+            ),
+        )
