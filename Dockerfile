@@ -41,13 +41,7 @@ env PATH /root/mambaforge/envs/cartography_tidy/bin:$PATH
 copy snakemake_executor_plugin_latch /root/snakemake_executor_plugin_latch
 run pip install /root/snakemake_executor_plugin_latch
 
-copy snakemake_storage_plugin_latch /root/snakemake_storage_plugin_latch
-run pip install /root/snakemake_storage_plugin_latch
-
-copy snakemake /root/snakemake
-run pip install /root/snakemake
-
-run pip install latch==2.54.0a8
+run pip install latch==2.54.0a8 snakemake snakemake-storage-plugin-latch
 
 # FOR DEV
 env LATCH_SDK_DOMAIN ligma.ai
