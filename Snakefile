@@ -474,9 +474,6 @@ rule calculate_key_protid_tmscores:
         key_protid_tmscores=os.path.join(PROTEIN_FEATURES_DIR, "key_protid_tmscore_features.tsv"),
     conda:
         "envs/foldseek.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "calculate_key_protid_tmscores.txt")
     shell:
@@ -521,9 +518,6 @@ rule leiden_clustering:
         leiden_features=os.path.join(FOLDSEEK_CLUSTERING_DIR, "leiden_features.tsv"),
     conda:
         "envs/analysis.yml"
-    resources:
-        mem_mb=8 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "leiden_clustering.txt")
     shell:
@@ -551,9 +545,6 @@ rule calculate_concordance:
         os.path.join(BENCHMARKS_DIR, "{protid}.calculate_concordance.txt")
     conda:
         "envs/pandas.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     shell:
         """
         python ProteinCartography/calculate_concordance.py \
@@ -637,9 +628,6 @@ rule aggregate_features:
         aggregated_features=os.path.join(
             LOCAL_FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features.tsv"
         ),
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "aggregate_features.txt")
     conda:
@@ -668,9 +656,6 @@ rule plot_interactive:
         html=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html")),
     conda:
         "envs/plotting.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "{plotting_mode}.plot_interactive.txt")
     shell:
@@ -703,9 +688,6 @@ rule plot_similarity_leiden:
         column="LeidenCluster",
     conda:
         "envs/plotting.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_similarity_leiden.txt")
     shell:
@@ -739,9 +721,6 @@ rule plot_similarity_strucluster:
         column="StruCluster",
     conda:
         "envs/plotting.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_similarity_strucluster.txt")
     shell:
@@ -769,9 +748,6 @@ rule plot_semantic_analysis:
         annot_column="'Protein names'",
     conda:
         "envs/plotting.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_semantic_analysis.txt")
     shell:
@@ -796,9 +772,6 @@ rule plot_cluster_distributions:
         svg=storage.latch(os.path.join(FINAL_RESULTS_DIR, f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg")),
     conda:
         "envs/plotting.yml"
-    resources:
-        mem_mb=4 * 1024,
-    threads: 2
     benchmark:
         os.path.join(BENCHMARKS_DIR, "plot_cluster_distributions_{protid}.txt")
     shell:
