@@ -26,17 +26,17 @@ run mkdir /opt/latch
 run apt-get update && apt-get install -y git
 
 run curl -L -O \
-    https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh \
+    https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh \
     && mkdir /root/.conda \
-    && bash Mambaforge-Linux-x86_64.sh -b \
-    && rm -f Mambaforge-Linux-x86_64.sh
+    && bash Miniforge3-Linux-x86_64.sh -b \
+    && rm -f Miniforge3-Linux-x86_64.sh
 
-env PATH /root/mambaforge/bin:$PATH
+env PATH /root/miniforge3/bin:$PATH
 
 copy envs/cartography_tidy.yml /root/envs/cartography_tidy.yml
 run mamba env create -f /root/envs/cartography_tidy.yml -n cartography_tidy
 
-env PATH /root/mambaforge/envs/cartography_tidy/bin:$PATH
+env PATH /root/miniforge3/envs/cartography_tidy/bin:$PATH
 
 copy snakemake_executor_plugin_latch /root/snakemake_executor_plugin_latch
 run pip install /root/snakemake_executor_plugin_latch
