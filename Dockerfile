@@ -45,8 +45,8 @@ run pip install /root/snakemake
 run pip install latch==2.54.0a8 snakemake-storage-plugin-latch snakemake-executor-plugin-latch==0.1.2
 
 # FOR DEV
-env LATCH_SDK_DOMAIN ligma.ai
-env LATCH_AUTHENTICATION_ENDPOINT https://nucleus.ligma.ai
+# env LATCH_SDK_DOMAIN ligma.ai
+# env LATCH_AUTHENTICATION_ENDPOINT https://nucleus.ligma.ai
 
 # Copy workflow data (use .dockerignore to skip files)
 copy . /root/

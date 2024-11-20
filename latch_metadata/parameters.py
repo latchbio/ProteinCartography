@@ -46,12 +46,12 @@ generated_parameters = {
     "input_dir": SnakemakeParameter(
         display_name="Input Dir",
         type=LatchDir,
-        default=LatchDir("latch://38.account/arcadia-data/inputs"),
+        default=LatchDir("latch:///arcadia-data/inputs"),
     ),
     "output_dir": SnakemakeParameter(
         display_name="Output Dir",
         type=LatchDir,
-        default=LatchDir("latch://38.account/arcadia-results"),
+        default=LatchDir("latch:///arcadia-results"),
     ),
     # ONLY NECESSARY FOR CLUSTER MODE
     # "features_file": SnakemakeParameter(

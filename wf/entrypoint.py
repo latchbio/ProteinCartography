@@ -173,11 +173,11 @@ def snakemake_runtime(
 def snakemake_v2_arcadia_protein_cartography_workflow(
     mode: PipelineMode = PipelineMode.search,
     input_dir: LatchDir = LatchDir(
-        "latch://38.account/arcadia-data/input",
-        remote_path="latch://38.account/arcadia-data/input",
+        "latch:///arcadia-data/input",
+        remote_path="latch:///arcadia-data/input",
     ),
     output_dir: LatchDir = LatchDir(
-        "latch://38.account/arcadia-results", remote_path="latch://38.account/arcadia-results"
+        "latch:///arcadia-results", remote_path="latch:///arcadia-results"
     ),
     analysis_name: str = "example",
     foldseek_databases: typing.List[str] = ["afdb50", "afdb-swissprot", "afdb-proteome"],

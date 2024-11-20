@@ -15,7 +15,7 @@ configfile: "./config.yml"
 version = Path("/root/version").read_text().strip()
 
 
-container: f"docker://812206152185.dkr.ecr.us-west-2.amazonaws.com/38_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:{version}"
+container: f"docker://812206152185.dkr.ecr.us-west-2.amazonaws.com/24030_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:{version}"
 
 
 # the mode in which to run the pipeline (either 'search' or 'cluster')
