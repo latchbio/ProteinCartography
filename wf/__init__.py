@@ -1,6 +1,4 @@
 import json
-import os
-import shutil
 import subprocess
 import sys
 import typing
@@ -14,9 +12,6 @@ from latch.resources.workflow import workflow
 from latch.types.directory import LatchDir, LatchOutputDir
 from latch.types.file import LatchFile
 from latch.types.metadata import LatchAuthor, LatchMetadata, LatchParameter
-from latch_cli.services.register.utils import import_module_by_path
-
-import_module_by_path(Path("latch_metadata/__init__.py"))
 
 
 class PipelineMode(Enum):
