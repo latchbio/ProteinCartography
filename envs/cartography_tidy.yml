@@ -1,3 +1,4 @@
+name: cartography_tidy
 channels:
   - conda-forge
   - bioconda

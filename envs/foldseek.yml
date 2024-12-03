@@ -1,3 +1,4 @@
+name: foldseek
 channels:
   - conda-forge
   - bioconda

@@ -100,7 +100,7 @@ rule make_pdb:
     benchmark:
         BENCHMARKS_DIR / "{protid}.make_pdb.txt"
     conda:
-        "envs/web_apis.yml"
+        "web_apis"
     shell:
         """
         python ProteinCartography/esmfold_apiquery.py --input {input.fasta_file} --output {output.pdb_file}
@@ -135,7 +135,7 @@ rule run_blast:
     benchmark:
         BENCHMARKS_DIR / "{protid}.run_blast.txt"
     conda:
-        "envs/blast.yml"
+        "blast"
     shell:
         """
         python ProteinCartography/run_blast.py \
@@ -160,7 +160,7 @@ rule extract_blast_hits:
     benchmark:
         BENCHMARKS_DIR / "{protid}.extract_blast_hits.txt"
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/extract_blast_hits.py \
@@ -180,7 +180,7 @@ rule map_refseq_ids:
     benchmark:
         BENCHMARKS_DIR / "{protid}.map_refseq_ids.txt"
     conda:
-        "envs/web_apis.yml"
+        "web_apis"
     shell:
         """
         python ProteinCartography/map_refseq_ids.py \
@@ -208,7 +208,7 @@ rule run_foldseek:
             db=FOLDSEEK_DATABASES,
         ),
     conda:
-        "envs/web_apis.yml"
+        "web_apis"
     benchmark:
         BENCHMARKS_DIR / "{protid}.run_foldseek.txt"
     shell:
@@ -228,7 +228,7 @@ rule extract_foldseek_hits:
     output:
         foldseek_hits=FOLDSEEK_RESULTS_DIR / "{protid}.foldseek_hits.txt",
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/extract_foldseek_hits.py \
@@ -253,7 +253,7 @@ rule aggregate_foldseek_fraction_seq_identity:
     benchmark:
         BENCHMARKS_DIR / "{protid}.aggregate_foldseek_fident.txt"
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/aggregate_foldseek_fraction_seq_identity.py \
@@ -291,7 +291,7 @@ rule fetch_uniprot_metadata:
     benchmark:
         BENCHMARKS_DIR / "fetch_uniprot_metadata.txt"
     conda:
-        "envs/web_apis.yml"
+        "web_apis"
     shell:
         """
         python ProteinCartography/fetch_uniprot_metadata.py \
@@ -313,7 +313,7 @@ rule filter_aggregated_hits:
     benchmark:
         BENCHMARKS_DIR / "filter_aggregated_hits.txt"
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/filter_aggregated_hits.py \
@@ -336,7 +336,7 @@ checkpoint download_pdbs:
     benchmark:
         BENCHMARKS_DIR / "download_pdbs.txt"
     conda:
-        "envs/web_apis.yml"
+        "web_apis"
     shell:
         """
         python ProteinCartography/download_pdbs.py \
@@ -388,7 +388,7 @@ rule assess_pdbs:
     benchmark:
         BENCHMARKS_DIR / "assess_pdbs.txt"
     conda:
-        "envs/plotting.yml"
+        "plotting"
     shell:
         """
         python ProteinCartography/assess_pdbs.py \
@@ -408,7 +408,7 @@ rule foldseek_clustering:
         struclusters_features=FOLDSEEK_CLUSTERING_DIR / "struclusters_features.tsv",
         foldseek_database=FOLDSEEK_CLUSTERING_DIR / "temp" / "temp_db",
     conda:
-        "envs/foldseek.yml"
+        "foldseek"
     resources:
         mem_mb=32 * 1000,
     threads: 16
@@ -459,7 +459,7 @@ rule calculate_key_protid_tmscores:
     output:
         key_protid_tmscores=PROTEIN_FEATURES_DIR / "key_protid_tmscore_features.tsv",
     conda:
-        "envs/foldseek.yml"
+        "foldseek"
     benchmark:
         BENCHMARKS_DIR / "calculate_key_protid_tmscores.txt"
     shell:
@@ -484,7 +484,7 @@ rule dim_reduction:
         all_by_all_tmscores=FOLDSEEK_CLUSTERING_DIR
         / "all_by_all_tmscore_pivoted_{plotting_mode}.tsv",
     conda:
-        "envs/analysis.yml"
+        "analysis"
     benchmark:
         BENCHMARKS_DIR / "{plotting_mode}.dim_reduction.txt"
     shell:
@@ -502,7 +502,7 @@ rule leiden_clustering:
     output:
         leiden_features=FOLDSEEK_CLUSTERING_DIR / "leiden_features.tsv",
     conda:
-        "envs/analysis.yml"
+        "analysis"
     benchmark:
         BENCHMARKS_DIR / "leiden_clustering.txt"
     shell:
@@ -529,7 +529,7 @@ rule calculate_concordance:
     benchmark:
         BENCHMARKS_DIR / "{protid}.calculate_concordance.txt"
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/calculate_concordance.py \
@@ -561,7 +561,7 @@ rule get_source_of_hits:
     benchmark:
         BENCHMARKS_DIR / "get_source_of_hits.txt"
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/get_source_of_hits.py \
@@ -614,7 +614,7 @@ rule aggregate_features:
     benchmark:
         BENCHMARKS_DIR / "aggregate_features.txt"
     conda:
-        "envs/pandas.yml"
+        "pandas"
     shell:
         """
         python ProteinCartography/aggregate_features.py \
@@ -638,7 +638,7 @@ rule plot_interactive:
     output:
         html=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html",
     conda:
-        "envs/plotting.yml"
+        "plotting"
     benchmark:
         BENCHMARKS_DIR / "{plotting_mode}.plot_interactive.txt"
     shell:
@@ -670,7 +670,7 @@ rule plot_similarity_leiden:
     params:
         column="LeidenCluster",
     conda:
-        "envs/plotting.yml"
+        "plotting"
     benchmark:
         BENCHMARKS_DIR / "plot_similarity_leiden.txt"
     shell:
@@ -703,7 +703,7 @@ rule plot_similarity_strucluster:
     params:
         column="StruCluster",
     conda:
-        "envs/plotting.yml"
+        "plotting"
     benchmark:
         BENCHMARKS_DIR / "plot_similarity_strucluster.txt"
     shell:
@@ -730,7 +730,7 @@ rule plot_semantic_analysis:
         agg_column="LeidenCluster",
         annot_column="'Protein names'",
     conda:
-        "envs/plotting.yml"
+        "plotting"
     benchmark:
         BENCHMARKS_DIR / "plot_semantic_analysis.txt"
     shell:
@@ -754,7 +754,7 @@ rule plot_cluster_distributions:
     output:
         svg=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg",
     conda:
-        "envs/plotting.yml"
+        "plotting"
     benchmark:
         BENCHMARKS_DIR / "plot_cluster_distributions_{protid}.txt"
     shell:
@@ -774,6 +774,7 @@ rule all:
     in order to allow the definition of its inputs in terms of the outputs of other rules
     (whose definitions must appear before this rule)
     """
+
     # we use `default_target` to tell snakemake that this is the first rule to run
     # (it otherwise defaults to running the first rule in the snakefile)
     default_target: True
