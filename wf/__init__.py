@@ -36,26 +36,22 @@ metadata = LatchMetadata(
     display_name="Arcadia Protein Cartography Workflow (Single Task)",
     author=LatchAuthor(name="Arcadia Biosciences"),
     parameters={
-        "mode": LatchParameter(display_name="mode", type=PipelineMode),
-        "input_dir": LatchParameter(display_name="input_dir", type=LatchDir),
-        "output_dir": LatchParameter(display_name="output_dir", type=LatchDir),
-        "analysis_name": LatchParameter(display_name="analysis_name", type=str),
-        "foldseek_databases": LatchParameter(
-            display_name="foldseek_databases", type=typing.List[str]
-        ),
-        "max_foldseek_hits": LatchParameter(display_name="max_foldseek_hits", type=int),
-        "max_blast_hits": LatchParameter(display_name="max_blast_hits", type=int),
-        "blast_word_size": LatchParameter(display_name="blast_word_size", type=int),
-        "blast_word_size_backoff": LatchParameter(display_name="blast_word_size_backoff", type=int),
-        "blast_evalue": LatchParameter(display_name="blast_evalue", type=float),
-        "blast_num_attempts": LatchParameter(display_name="blast_num_attempts", type=int),
-        "max_structures": LatchParameter(display_name="max_structures", type=int),
-        "min_length": LatchParameter(display_name="min_length", type=int),
-        "max_length": LatchParameter(display_name="max_length", type=int),
-        "plotting_modes": LatchParameter(
-            display_name="plotting_modes", type=typing.List[PlottingMode]
-        ),
-        "taxon_focus": LatchParameter(display_name="taxon_focus", type=TaxonFocus),
+        "mode": LatchParameter(display_name="mode"),
+        "input_dir": LatchParameter(display_name="input_dir"),
+        "output_dir": LatchParameter(display_name="output_dir"),
+        "analysis_name": LatchParameter(display_name="analysis_name"),
+        "foldseek_databases": LatchParameter(display_name="foldseek_databases"),
+        "max_foldseek_hits": LatchParameter(display_name="max_foldseek_hits"),
+        "max_blast_hits": LatchParameter(display_name="max_blast_hits"),
+        "blast_word_size": LatchParameter(display_name="blast_word_size"),
+        "blast_word_size_backoff": LatchParameter(display_name="blast_word_size_backoff"),
+        "blast_evalue": LatchParameter(display_name="blast_evalue"),
+        "blast_num_attempts": LatchParameter(display_name="blast_num_attempts"),
+        "max_structures": LatchParameter(display_name="max_structures"),
+        "min_length": LatchParameter(display_name="min_length"),
+        "max_length": LatchParameter(display_name="max_length"),
+        "plotting_modes": LatchParameter(display_name="plotting_modes"),
+        "taxon_focus": LatchParameter(display_name="taxon_focus"),
     },
 )
 
