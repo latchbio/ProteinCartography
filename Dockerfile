@@ -34,23 +34,25 @@ run curl -L -O \
 env PATH /root/miniforge3/bin:$PATH
 
 copy envs /root/envs
-run mamba env create -f /root/envs/analysis.yml
-run mamba env create -f /root/envs/blast.yml
-run mamba env create -f /root/envs/cartography_dev.yml
-run mamba env create -f /root/envs/cartography_pub.yml
-run mamba env create -f /root/envs/cartography_test.yml
-run mamba env create -f /root/envs/foldseek.yml
-run mamba env create -f /root/envs/pandas.yml
-run mamba env create -f /root/envs/plotting.yml
-run mamba env create -f /root/envs/web_apis.yml
+run mamba env create -n analysis -f /root/envs/analysis.yml
+run mamba env create -n blast -f /root/envs/blast.yml
+run mamba env create -n cartography_dev -f /root/envs/cartography_dev.yml
+run mamba env create -n cartography_pub -f /root/envs/cartography_pub.yml
+run mamba env create -n cartography_test -f /root/envs/cartography_test.yml
+run mamba env create -n foldseek -f /root/envs/foldseek.yml
+run mamba env create -n pandas -f /root/envs/pandas.yml
+run mamba env create -n plotting -f /root/envs/plotting.yml
+run mamba env create -n web_apis -f /root/envs/web_apis.yml
 
 run mamba env create -f /root/envs/cartography_tidy.yml
 
 env PATH /root/miniforge3/envs/cartography_tidy/bin:$PATH
 
 run pip install \
-        latch==2.54.0a8 \
+        latch==2.54.8 \
         snakemake
+
+run cp /root/miniforge3/bin/mamba /root/miniforge3/bin/conda
 
 # Copy workflow data (use .dockerignore to skip files)
 copy . /root/

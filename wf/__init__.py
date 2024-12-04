@@ -76,7 +76,7 @@ def get_config_val(val: typing.Any):
     return str(val)
 
 
-@custom_task(cpu=1, memory=2, storage_gib=50)
+@custom_task(cpu=4, memory=8)
 def snakemake_runtime(
     mode: PipelineMode = PipelineMode.search,
     input_dir: LatchDir = LatchDir("latch://1721.account/arcadia-data/search-mode/input"),
@@ -122,6 +122,8 @@ def snakemake_runtime(
 
     cmd = [
         "snakemake",
+        "--cores",
+        "1",
         "--configfile",
         str(config_path),
         "--rerun-triggers",
