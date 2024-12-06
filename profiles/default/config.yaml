@@ -1,0 +1,4 @@
+default-resources:
+  cores: 2
+  mem_mib: 4 * 1024
+

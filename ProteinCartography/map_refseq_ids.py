@@ -5,16 +5,14 @@ import sys
 from time import sleep
 
 import pandas as pd
-from api_utils import (
-    UniProtWithExpBackoff,
-    session_with_retry,
-)
+from api_utils import UniProtWithExpBackoff, session_with_retry
 from constants import UniProtService
-from tests import mocks
 
 # if necessary, mock the `uniprot.mapping` method (used by `map_refseqids_bioservices`)
 # see comments in `tests.mocks` for more details
 if os.environ.get("PROTEINCARTOGRAPHY_WAS_CALLED_BY_PYTEST") == "true":
+    from tests import mocks
+
     mocks.mock_bioservices_uniprot_mapping()
 
 # only import these functions when using import *
