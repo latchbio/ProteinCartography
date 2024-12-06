@@ -1,0 +1,21 @@
+from python:3.11-slim-bullseye
+
+run apt-get update && \
+    apt-get install -y curl git
+
+run curl -L -O \
+    https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && \
+    mkdir /root/.conda && \
+    bash Miniforge3-Linux-x86_64.sh -b && \
+    rm -f Miniforge3-Linux-x86_64.sh
+
+env PATH /root/miniforge3/bin:$PATH
+
+copy envs/web_apis.yml /root/env.yaml
+
+run mamba env create -f /root/env.yaml -n web_apis
+
+env PATH /root/miniforge3/envs/web_apis/bin:$PATH
+
+run pip install snakemake-storage-plugin-latch==0.1.5
+

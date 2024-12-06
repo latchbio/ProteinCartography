@@ -1,0 +1,133 @@
+Step 1/19 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base-snakemake:0.1.0
+
+
+ ---> 1e5e51399e11
+
+Step 2/19 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> 8c78401eafe1
+
+Step 3/19 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> c93526e8b8c0
+
+Step 4/19 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 8cefbbd2aba3
+
+Step 5/19 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 3c8072deeda7
+
+Step 6/19 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> f56332cbd8ba
+
+Step 7/19 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> 72ecad9cee7c
+
+Step 8/19 : run apt-get update && apt-get install -y git
+
+
+ ---> Using cache
+
+ ---> 19a679281042
+
+Step 9/19 : run curl -L -O     https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh     && mkdir /root/.conda     && bash Miniforge3-Linux-x86_64.sh -b     && rm -f Miniforge3-Linux-x86_64.sh
+
+
+ ---> Using cache
+
+ ---> 6b5c701ff12f
+
+Step 10/19 : env PATH /root/miniforge3/bin:$PATH
+
+
+ ---> Using cache
+
+ ---> 0b97d42dea24
+
+Step 11/19 : copy envs/cartography_tidy.yml /root/envs/cartography_tidy.yml
+
+
+ ---> Using cache
+
+ ---> be776db15a41
+
+Step 12/19 : run mamba env create -f /root/envs/cartography_tidy.yml -n cartography_tidy
+
+
+ ---> Using cache
+
+ ---> 3746f91e3383
+
+Step 13/19 : env PATH /root/miniforge3/envs/cartography_tidy/bin:$PATH
+
+
+ ---> Using cache
+
+ ---> d458227a9b16
+
+Step 14/19 : copy snakemake_executor_plugin_latch-0.1.4-py3-none-any.whl /root/snakemake_executor_plugin_latch-0.1.4-py3-none-any.whl
+
+
+ ---> Using cache
+
+ ---> 2017e3e29111
+
+Step 15/19 : run pip install         latch==2.54.0a8         snakemake         snakemake-storage-plugin-latch==0.1.2         /root/snakemake_executor_plugin_latch-0.1.4-py3-none-any.whl
+
+
+ ---> Using cache
+
+ ---> 6a043bb00bbf
+
+Step 16/19 : copy . /root/
+
+
+ ---> 4c7c21d23557
+
+Step 17/19 : arg tag
+
+
+ ---> Running in f01bcb7cd438
+
+ ---> 424ce206e5ed
+
+Step 18/19 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in 0831258016a6
+
+ ---> 4281b5120617
+
+Step 19/19 : workdir /root
+
+
+ ---> Running in cc3421a25e34
+
+ ---> 1f1662e03116
+
+Successfully built 1f1662e03116
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/1721_wf_entrypoint_snakemake_v2_arcadia_protein_cartography_workflow:0.4.10
+

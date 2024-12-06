@@ -66,6 +66,7 @@ target/
 # Pycharm and VSCode
 .idea/
 venv/
+.venv
 .vscode/
 
 # Jupyter notebook checkpoints
@@ -83,3 +84,5 @@ venv/
 # Nextflow related folders and files
 .nextflow*
 work/
+
+.latch/logs

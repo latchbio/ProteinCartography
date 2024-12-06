@@ -99,8 +99,8 @@ rule make_pdb:
         pdb_file=INPUT_DIR / "{protid}.pdb",
     benchmark:
         BENCHMARKS_DIR / "{protid}.make_pdb.txt"
-    conda:
-        "envs/web_apis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
     shell:
         """
         python ProteinCartography/esmfold_apiquery.py --input {input.fasta_file} --output {output.pdb_file}
@@ -134,8 +134,8 @@ rule run_blast:
         blast_results=BLAST_RESULTS_DIR / "{protid}.blast_results.tsv",
     benchmark:
         BENCHMARKS_DIR / "{protid}.run_blast.txt"
-    conda:
-        "envs/blast.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/blast:0.5.0",
     shell:
         """
         python ProteinCartography/run_blast.py \
@@ -159,8 +159,8 @@ rule extract_blast_hits:
         blast_hits=BLAST_RESULTS_DIR / "{protid}.blast_hits.refseq.txt",
     benchmark:
         BENCHMARKS_DIR / "{protid}.extract_blast_hits.txt"
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/extract_blast_hits.py \
@@ -179,8 +179,8 @@ rule map_refseq_ids:
         blast_hits_uniprot_ids=BLAST_RESULTS_DIR / "{protid}.blast_hits.uniprot.txt",
     benchmark:
         BENCHMARKS_DIR / "{protid}.map_refseq_ids.txt"
-    conda:
-        "envs/web_apis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
     shell:
         """
         python ProteinCartography/map_refseq_ids.py \
@@ -207,8 +207,8 @@ rule run_foldseek:
             FOLDSEEK_RESULTS_DIR / "{{protid}}" / "alis_{db}.m8",
             db=FOLDSEEK_DATABASES,
         ),
-    conda:
-        "envs/web_apis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "{protid}.run_foldseek.txt"
     shell:
@@ -227,8 +227,8 @@ rule extract_foldseek_hits:
         m8_files=rules.run_foldseek.output.m8_files,
     output:
         foldseek_hits=FOLDSEEK_RESULTS_DIR / "{protid}.foldseek_hits.txt",
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/extract_foldseek_hits.py \
@@ -252,8 +252,8 @@ rule aggregate_foldseek_fraction_seq_identity:
         fident_features=PROTEIN_FEATURES_DIR / "{protid}_fident_features.tsv",
     benchmark:
         BENCHMARKS_DIR / "{protid}.aggregate_foldseek_fident.txt"
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/aggregate_foldseek_fraction_seq_identity.py \
@@ -290,8 +290,8 @@ rule fetch_uniprot_metadata:
         uniprot_features=PROTEIN_FEATURES_DIR / "uniprot_features.tsv",
     benchmark:
         BENCHMARKS_DIR / "fetch_uniprot_metadata.txt"
-    conda:
-        "envs/web_apis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
     shell:
         """
         python ProteinCartography/fetch_uniprot_metadata.py \
@@ -312,8 +312,8 @@ rule filter_aggregated_hits:
         filtered_aggregated_hits=PROTEIN_FEATURES_DIR / "filtered_aggregated_hits.txt",
     benchmark:
         BENCHMARKS_DIR / "filter_aggregated_hits.txt"
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/filter_aggregated_hits.py \
@@ -335,8 +335,8 @@ checkpoint download_pdbs:
         protein_structures_dir=directory(DOWNLOADED_PROTEIN_STRUCTURES_DIR),
     benchmark:
         BENCHMARKS_DIR / "download_pdbs.txt"
-    conda:
-        "envs/web_apis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
     shell:
         """
         python ProteinCartography/download_pdbs.py \
@@ -387,8 +387,8 @@ rule assess_pdbs:
         pdb_features=PROTEIN_FEATURES_DIR / "pdb_features.tsv",
     benchmark:
         BENCHMARKS_DIR / "assess_pdbs.txt"
-    conda:
-        "envs/plotting.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
     shell:
         """
         python ProteinCartography/assess_pdbs.py \
@@ -407,10 +407,10 @@ rule foldseek_clustering:
         all_by_all_tmscores=FOLDSEEK_CLUSTERING_DIR / "all_by_all_tmscore_pivoted.tsv",
         struclusters_features=FOLDSEEK_CLUSTERING_DIR / "struclusters_features.tsv",
         foldseek_database=FOLDSEEK_CLUSTERING_DIR / "temp" / "temp_db",
-    conda:
-        "envs/foldseek.yml"
     resources:
-        mem_mb=32 * 1000,
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/foldseek:0.5.0",
+        cores=16,
+        mem_gib=32,
     threads: 16
     benchmark:
         BENCHMARKS_DIR / "foldseek_clustering.txt"
@@ -458,8 +458,8 @@ rule calculate_key_protid_tmscores:
         foldseek_database=rules.foldseek_clustering.output.foldseek_database,
     output:
         key_protid_tmscores=PROTEIN_FEATURES_DIR / "key_protid_tmscore_features.tsv",
-    conda:
-        "envs/foldseek.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/foldseek:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "calculate_key_protid_tmscores.txt"
     shell:
@@ -483,8 +483,8 @@ rule dim_reduction:
     output:
         all_by_all_tmscores=FOLDSEEK_CLUSTERING_DIR
         / "all_by_all_tmscore_pivoted_{plotting_mode}.tsv",
-    conda:
-        "envs/analysis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/analysis:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "{plotting_mode}.dim_reduction.txt"
     shell:
@@ -501,8 +501,8 @@ rule leiden_clustering:
         rules.foldseek_clustering.output.all_by_all_tmscores,
     output:
         leiden_features=FOLDSEEK_CLUSTERING_DIR / "leiden_features.tsv",
-    conda:
-        "envs/analysis.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/analysis:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "leiden_clustering.txt"
     shell:
@@ -528,8 +528,8 @@ rule calculate_concordance:
         concordance_features=PROTEIN_FEATURES_DIR / "{protid}_concordance_features.tsv",
     benchmark:
         BENCHMARKS_DIR / "{protid}.calculate_concordance.txt"
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/calculate_concordance.py \
@@ -560,8 +560,8 @@ rule get_source_of_hits:
         source_features=PROTEIN_FEATURES_DIR / "source_features.tsv",
     benchmark:
         BENCHMARKS_DIR / "get_source_of_hits.txt"
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/get_source_of_hits.py \
@@ -613,8 +613,8 @@ rule aggregate_features:
         aggregated_features=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_aggregated_features.tsv",
     benchmark:
         BENCHMARKS_DIR / "aggregate_features.txt"
-    conda:
-        "envs/pandas.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
     shell:
         """
         python ProteinCartography/aggregate_features.py \
@@ -637,8 +637,8 @@ rule plot_interactive:
         features=rules.aggregate_features.output.aggregated_features,
     output:
         html=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html",
-    conda:
-        "envs/plotting.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "{plotting_mode}.plot_interactive.txt"
     shell:
@@ -669,8 +669,8 @@ rule plot_similarity_leiden:
         html=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_leiden_similarity.html",
     params:
         column="LeidenCluster",
-    conda:
-        "envs/plotting.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "plot_similarity_leiden.txt"
     shell:
@@ -702,8 +702,8 @@ rule plot_similarity_strucluster:
         html=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_strucluster_similarity.html",
     params:
         column="StruCluster",
-    conda:
-        "envs/plotting.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "plot_similarity_strucluster.txt"
     shell:
@@ -729,8 +729,8 @@ rule plot_semantic_analysis:
     params:
         agg_column="LeidenCluster",
         annot_column="'Protein names'",
-    conda:
-        "envs/plotting.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "plot_semantic_analysis.txt"
     shell:
@@ -753,8 +753,8 @@ rule plot_cluster_distributions:
         features=rules.aggregate_features.output.aggregated_features,
     output:
         svg=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg",
-    conda:
-        "envs/plotting.yml"
+    resources:
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
     benchmark:
         BENCHMARKS_DIR / "plot_cluster_distributions_{protid}.txt"
     shell:
@@ -774,6 +774,7 @@ rule all:
     in order to allow the definition of its inputs in terms of the outputs of other rules
     (whose definitions must appear before this rule)
     """
+
     # we use `default_target` to tell snakemake that this is the first rule to run
     # (it otherwise defaults to running the first rule in the snakefile)
     default_target: True
