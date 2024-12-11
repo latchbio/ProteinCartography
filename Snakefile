@@ -46,7 +46,7 @@ FOLDSEEK_RESULTS_DIR = OUTPUT_DIR / "foldseek_results"
 PROTEIN_FEATURES_DIR = OUTPUT_DIR / "protein_features"
 
 # PDBs downloaded from AlphaFold
-DOWNLOADED_PROTEIN_STRUCTURES_DIR = OUTPUT_DIR / "protein_structures"
+DOWNLOADED_PROTEIN_STRUCTURES_DIR = Path("/snakemake-workdir/protein_structures")
 
 # the directory containing the PDB files to assess and cluster (this is mode-dependent)
 ANALYZED_PROTEIN_STRUCTURES_DIR = (
@@ -100,7 +100,7 @@ rule make_pdb:
     benchmark:
         BENCHMARKS_DIR / "{protid}.make_pdb.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.19",
     shell:
         """
         python ProteinCartography/esmfold_apiquery.py --input {input.fasta_file} --output {output.pdb_file}
@@ -117,7 +117,7 @@ rule copy_pdb:
         DOWNLOADED_PROTEIN_STRUCTURES_DIR / "{protid}.pdb",
     shell:
         """
-        cp {input} {output}
+        if [ ! -f {output} ]; then cp {input} {output}; fi
         """
 
 
@@ -135,7 +135,7 @@ rule run_blast:
     benchmark:
         BENCHMARKS_DIR / "{protid}.run_blast.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/blast:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/blast:0.5.19",
     shell:
         """
         python ProteinCartography/run_blast.py \
@@ -160,7 +160,7 @@ rule extract_blast_hits:
     benchmark:
         BENCHMARKS_DIR / "{protid}.extract_blast_hits.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/extract_blast_hits.py \
@@ -180,7 +180,7 @@ rule map_refseq_ids:
     benchmark:
         BENCHMARKS_DIR / "{protid}.map_refseq_ids.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.19",
     shell:
         """
         python ProteinCartography/map_refseq_ids.py \
@@ -208,7 +208,7 @@ rule run_foldseek:
             db=FOLDSEEK_DATABASES,
         ),
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "{protid}.run_foldseek.txt"
     shell:
@@ -228,7 +228,7 @@ rule extract_foldseek_hits:
     output:
         foldseek_hits=FOLDSEEK_RESULTS_DIR / "{protid}.foldseek_hits.txt",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/extract_foldseek_hits.py \
@@ -253,7 +253,7 @@ rule aggregate_foldseek_fraction_seq_identity:
     benchmark:
         BENCHMARKS_DIR / "{protid}.aggregate_foldseek_fident.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/aggregate_foldseek_fraction_seq_identity.py \
@@ -291,7 +291,7 @@ rule fetch_uniprot_metadata:
     benchmark:
         BENCHMARKS_DIR / "fetch_uniprot_metadata.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.19",
     shell:
         """
         python ProteinCartography/fetch_uniprot_metadata.py \
@@ -313,7 +313,7 @@ rule filter_aggregated_hits:
     benchmark:
         BENCHMARKS_DIR / "filter_aggregated_hits.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/filter_aggregated_hits.py \
@@ -336,7 +336,7 @@ checkpoint download_pdbs:
     benchmark:
         BENCHMARKS_DIR / "download_pdbs.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/web_apis:0.5.19",
     shell:
         """
         python ProteinCartography/download_pdbs.py \
@@ -388,7 +388,7 @@ rule assess_pdbs:
     benchmark:
         BENCHMARKS_DIR / "assess_pdbs.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.19",
     shell:
         """
         python ProteinCartography/assess_pdbs.py \
@@ -407,8 +407,10 @@ rule foldseek_clustering:
         all_by_all_tmscores=FOLDSEEK_CLUSTERING_DIR / "all_by_all_tmscore_pivoted.tsv",
         struclusters_features=FOLDSEEK_CLUSTERING_DIR / "struclusters_features.tsv",
         foldseek_database=FOLDSEEK_CLUSTERING_DIR / "temp" / "temp_db",
+    params:
+        foldseek_clustering_dir=storage(str(FOLDSEEK_CLUSTERING_DIR)),
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/foldseek:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/foldseek:0.5.19",
         cores=16,
         mem_gib=32,
     threads: 16
@@ -418,7 +420,7 @@ rule foldseek_clustering:
         """
         python ProteinCartography/foldseek_clustering.py \
             --query-folder {ANALYZED_PROTEIN_STRUCTURES_DIR} \
-            --results-folder {FOLDSEEK_CLUSTERING_DIR}
+            --results-folder {params.foldseek_clustering_dir}
         """
 
 
@@ -459,7 +461,7 @@ rule calculate_key_protid_tmscores:
     output:
         key_protid_tmscores=PROTEIN_FEATURES_DIR / "key_protid_tmscore_features.tsv",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/foldseek:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/foldseek:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "calculate_key_protid_tmscores.txt"
     shell:
@@ -484,7 +486,7 @@ rule dim_reduction:
         all_by_all_tmscores=FOLDSEEK_CLUSTERING_DIR
         / "all_by_all_tmscore_pivoted_{plotting_mode}.tsv",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/analysis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/analysis:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "{plotting_mode}.dim_reduction.txt"
     shell:
@@ -502,7 +504,7 @@ rule leiden_clustering:
     output:
         leiden_features=FOLDSEEK_CLUSTERING_DIR / "leiden_features.tsv",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/analysis:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/analysis:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "leiden_clustering.txt"
     shell:
@@ -529,7 +531,7 @@ rule calculate_concordance:
     benchmark:
         BENCHMARKS_DIR / "{protid}.calculate_concordance.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/calculate_concordance.py \
@@ -561,7 +563,7 @@ rule get_source_of_hits:
     benchmark:
         BENCHMARKS_DIR / "get_source_of_hits.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/get_source_of_hits.py \
@@ -614,7 +616,7 @@ rule aggregate_features:
     benchmark:
         BENCHMARKS_DIR / "aggregate_features.txt"
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/pandas:0.5.19",
     shell:
         """
         python ProteinCartography/aggregate_features.py \
@@ -638,7 +640,7 @@ rule plot_interactive:
     output:
         html=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_aggregated_features_{{plotting_mode}}.html",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "{plotting_mode}.plot_interactive.txt"
     shell:
@@ -670,7 +672,7 @@ rule plot_similarity_leiden:
     params:
         column="LeidenCluster",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "plot_similarity_leiden.txt"
     shell:
@@ -703,7 +705,7 @@ rule plot_similarity_strucluster:
     params:
         column="StruCluster",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "plot_similarity_strucluster.txt"
     shell:
@@ -730,7 +732,7 @@ rule plot_semantic_analysis:
         agg_column="LeidenCluster",
         annot_column="'Protein names'",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "plot_semantic_analysis.txt"
     shell:
@@ -754,7 +756,7 @@ rule plot_cluster_distributions:
     output:
         svg=FINAL_RESULTS_DIR / f"{ANALYSIS_NAME}_{{protid}}_distribution_analysis.svg",
     resources:
-        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.0",
+        container="812206152185.dkr.ecr.us-west-2.amazonaws.com/snakemake/arcadia/plotting:0.5.19",
     benchmark:
         BENCHMARKS_DIR / "plot_cluster_distributions_{protid}.txt"
     shell:

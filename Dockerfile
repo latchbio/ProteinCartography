@@ -41,8 +41,8 @@ env PATH /root/miniforge3/envs/cartography_tidy/bin:$PATH
 run pip install \
         latch==2.54.0a8 \
         snakemake \
-        snakemake-storage-plugin-latch==0.1.5 \
-        snakemake-executor-plugin-latch==0.1.5
+        snakemake-storage-plugin-latch==0.1.7 \
+        snakemake-executor-plugin-latch==0.1.6
 
 # FOR DEV
 # env LATCH_SDK_DOMAIN ligma.ai

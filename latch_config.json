@@ -1,0 +1,27 @@
+{
+  "mode": "search",
+  "input_dir": "demo/search-mode/input",
+  "output_dir": "/ldata/1721.account/arcadia-results-new-storage-7",
+  "features_file": "",
+  "features_override_file": "",
+  "analysis_name": "example",
+  "foldseek_databases": [
+    "afdb50",
+    "afdb-swissprot",
+    "afdb-proteome"
+  ],
+  "max_foldseek_hits": 3000,
+  "max_blast_hits": 3000,
+  "blast_word_size": 5,
+  "blast_word_size_backoff": 6,
+  "blast_evalue": 1.0,
+  "blast_num_attempts": 3,
+  "max_structures": 5000,
+  "min_length": 0,
+  "max_length": 0,
+  "plotting_modes": [
+    "pca_tsne",
+    "pca_umap"
+  ],
+  "taxon_focus": "euk"
+}

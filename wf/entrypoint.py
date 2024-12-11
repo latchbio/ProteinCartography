@@ -4,18 +4,47 @@ import shutil
 import subprocess
 import sys
 import typing
-from dataclasses import dataclass
+from dataclasses import fields, is_dataclass
 from enum import Enum
 from pathlib import Path
+from typing import Any
+from urllib.parse import urlparse
 
 import requests
-import typing_extensions
+from latch.ldata.path import LPath
 from latch.resources.tasks import custom_task, snakemake_runtime_task
 from latch.resources.workflow import workflow
 from latch.types.directory import LatchDir, LatchOutputDir
 from latch.types.file import LatchFile
+from latch.utils import current_workspace
 from latch_cli.services.register.utils import import_module_by_path
-from latch_cli.snakemake.v2.utils import get_config_val
+
+
+def get_config_val(val: Any):
+    if val is None:
+        return ""
+    if isinstance(val, list):
+        return [get_config_val(x) for x in val]
+    if isinstance(val, dict):
+        return {k: get_config_val(v) for k, v in val.items()}
+    if isinstance(val, (LatchFile, LatchDir)):
+        if val.remote_path is not None:
+            parsed = urlparse(val.remote_path)
+            domain = parsed.netloc
+            if domain == "":
+                ws = current_workspace()
+                domain = f"{ws}.account"
+
+            return f"/ldata/{domain}{parsed.path}"
+    if isinstance(val, (int, float, bool, type(None))):
+        return val
+    if is_dataclass(val):
+        return {f.name: get_config_val(getattr(val, f.name)) for f in fields(val)}
+    if isinstance(val, Enum):
+        return val.value
+
+    return str(val)
+
 
 import_module_by_path(Path("latch_metadata/__init__.py"))
 
@@ -53,7 +82,7 @@ def initialize() -> str:
         "http://nf-dispatcher-service.flyte.svc.cluster.local/provision-storage-ofs",
         headers=headers,
         json={
-            "storage_expiration_hours": 0,
+            "storage_expiration_hours": 2,
             "version": 2,
             "snakemake": True,
         },
@@ -70,7 +99,9 @@ def snakemake_runtime(
     features_file: typing.Optional[LatchFile],
     features_override_file: typing.Optional[LatchFile],
     mode: PipelineMode = PipelineMode.search,
-    input_dir: LatchDir = LatchDir("latch://1721.account/arcadia-data/inputs"),
+    input_dir: LatchDir = LatchDir(
+        "/snakemake-workdir/inputs", "latch://1721.account/arcadia-data/inputs"
+    ),
     output_dir: LatchOutputDir = LatchDir("latch://1721.account/arcadia-results"),
     analysis_name: str = "example",
     foldseek_databases: typing.List[str] = ["afdb50", "afdb-swissprot", "afdb-proteome"],
@@ -90,6 +121,10 @@ def snakemake_runtime(
 
     shared = Path("/snakemake-workdir")
     snakefile = shared / "Snakefile"
+
+    print(f"Staging {input_dir.remote_path}...", flush=True)
+    input_dir = LPath(input_dir.remote_path).download(shared / "input_dir")
+    print("Done.")
 
     config = {
         "mode": get_config_val(mode),
@@ -114,6 +149,8 @@ def snakemake_runtime(
 
     config_path = (shared / "__latch.config.json").resolve()
     config_path.write_text(json.dumps(config, indent=2))
+
+    print(json.dumps(config, indent=2))
 
     ignore_list = [
         "latch",
@@ -144,8 +181,12 @@ def snakemake_runtime(
         str(config_path),
         "--executor",
         "latch",
+        "--default-storage-provider",
+        "latch",
         "--jobs",
         "1000",
+        "--rerun-triggers",
+        "mtime",
     ]
 
     print("Launching Snakemake Runtime")
@@ -166,8 +207,8 @@ def snakemake_runtime(
 @workflow(smv2._snakemake_v2_metadata)
 def snakemake_v2_arcadia_protein_cartography_workflow_new_storage(
     mode: PipelineMode = PipelineMode.search,
-    input_dir: LatchDir = LatchDir("latch://1721.account/arcadia-data/inputs"),
-    output_dir: LatchOutputDir = LatchDir("latch://1721.account/arcadia-results"),
+    input_dir: LatchDir = LatchDir("latch://1721.account/arcadia-data/search-mode/input"),
+    output_dir: LatchOutputDir = LatchDir("latch://1721.account/arcadia-results-new-storage"),
     analysis_name: str = "example",
     foldseek_databases: typing.List[str] = ["afdb50", "afdb-swissprot", "afdb-proteome"],
     features_file: typing.Optional[LatchFile] = None,

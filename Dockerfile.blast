@@ -17,5 +17,5 @@ run mamba env create -f /root/env.yaml -n blast
 
 env PATH /root/miniforge3/envs/blast/bin:$PATH
 
-run pip install snakemake-storage-plugin-latch==0.1.5
+run pip install snakemake-storage-plugin-latch==0.1.7
 
